@@ -49,6 +49,7 @@ namespace Calculator
             this.clear = new System.Windows.Forms.Button();
             this.backspace = new System.Windows.Forms.Button();
             this.ans = new System.Windows.Forms.Button();
+            this.ioScreen = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // btn1
@@ -259,11 +260,21 @@ namespace Calculator
             this.ans.UseVisualStyleBackColor = true;
             this.ans.Click += new System.EventHandler(this.ans_Click);
             // 
+            // ioScreen
+            // 
+            this.ioScreen.Location = new System.Drawing.Point(12, 12);
+            this.ioScreen.Name = "ioScreen";
+            this.ioScreen.Size = new System.Drawing.Size(446, 86);
+            this.ioScreen.TabIndex = 20;
+            this.ioScreen.Text = "";
+            this.ioScreen.TextChanged += new System.EventHandler(this.ioScreen_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(470, 360);
+            this.Controls.Add(this.ioScreen);
             this.Controls.Add(this.ans);
             this.Controls.Add(this.backspace);
             this.Controls.Add(this.clear);
@@ -312,6 +323,7 @@ namespace Calculator
         private System.Windows.Forms.Button clear;
         private System.Windows.Forms.Button backspace;
         private System.Windows.Forms.Button ans;
+        private System.Windows.Forms.RichTextBox ioScreen;
     }
 }
 
