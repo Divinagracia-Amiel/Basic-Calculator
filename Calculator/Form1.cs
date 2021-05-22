@@ -47,11 +47,6 @@ namespace Calculator
 
         }
 
-        private void ioScreen_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void equal_Click(object sender, EventArgs e)
         {
 
@@ -63,6 +58,16 @@ namespace Calculator
         }
 
         private void neg_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clPar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void opPar_Click(object sender, EventArgs e)
         {
 
         }

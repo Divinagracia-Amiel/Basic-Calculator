@@ -49,7 +49,8 @@ namespace Calculator
             this.clear = new System.Windows.Forms.Button();
             this.backspace = new System.Windows.Forms.Button();
             this.ans = new System.Windows.Forms.Button();
-            this.ioScreen = new System.Windows.Forms.RichTextBox();
+            this.clPar = new System.Windows.Forms.Button();
+            this.opPar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn1
@@ -187,9 +188,9 @@ namespace Calculator
             // plus
             // 
             this.plus.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.plus.Location = new System.Drawing.Point(207, 232);
+            this.plus.Location = new System.Drawing.Point(207, 168);
             this.plus.Name = "plus";
-            this.plus.Size = new System.Drawing.Size(124, 58);
+            this.plus.Size = new System.Drawing.Size(59, 58);
             this.plus.TabIndex = 13;
             this.plus.Text = "+";
             this.plus.UseVisualStyleBackColor = true;
@@ -198,9 +199,9 @@ namespace Calculator
             // minus
             // 
             this.minus.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minus.Location = new System.Drawing.Point(207, 296);
+            this.minus.Location = new System.Drawing.Point(272, 168);
             this.minus.Name = "minus";
-            this.minus.Size = new System.Drawing.Size(124, 58);
+            this.minus.Size = new System.Drawing.Size(59, 58);
             this.minus.TabIndex = 14;
             this.minus.Text = "-";
             this.minus.UseVisualStyleBackColor = true;
@@ -211,7 +212,7 @@ namespace Calculator
             this.mult.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mult.Location = new System.Drawing.Point(207, 104);
             this.mult.Name = "mult";
-            this.mult.Size = new System.Drawing.Size(124, 58);
+            this.mult.Size = new System.Drawing.Size(59, 58);
             this.mult.TabIndex = 15;
             this.mult.Text = "×";
             this.mult.UseVisualStyleBackColor = true;
@@ -219,9 +220,9 @@ namespace Calculator
             // div
             // 
             this.div.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.div.Location = new System.Drawing.Point(207, 168);
+            this.div.Location = new System.Drawing.Point(272, 104);
             this.div.Name = "div";
-            this.div.Size = new System.Drawing.Size(124, 58);
+            this.div.Size = new System.Drawing.Size(59, 58);
             this.div.TabIndex = 16;
             this.div.Text = "÷";
             this.div.UseVisualStyleBackColor = true;
@@ -230,7 +231,7 @@ namespace Calculator
             // clear
             // 
             this.clear.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clear.Location = new System.Drawing.Point(337, 170);
+            this.clear.Location = new System.Drawing.Point(337, 168);
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(124, 58);
             this.clear.TabIndex = 17;
@@ -260,21 +261,35 @@ namespace Calculator
             this.ans.UseVisualStyleBackColor = true;
             this.ans.Click += new System.EventHandler(this.ans_Click);
             // 
-            // ioScreen
+            // clPar
             // 
-            this.ioScreen.Location = new System.Drawing.Point(12, 12);
-            this.ioScreen.Name = "ioScreen";
-            this.ioScreen.Size = new System.Drawing.Size(446, 86);
-            this.ioScreen.TabIndex = 20;
-            this.ioScreen.Text = "";
-            this.ioScreen.TextChanged += new System.EventHandler(this.ioScreen_TextChanged);
+            this.clPar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clPar.Location = new System.Drawing.Point(207, 232);
+            this.clPar.Name = "clPar";
+            this.clPar.Size = new System.Drawing.Size(124, 58);
+            this.clPar.TabIndex = 21;
+            this.clPar.Text = ")";
+            this.clPar.UseVisualStyleBackColor = true;
+            this.clPar.Click += new System.EventHandler(this.clPar_Click);
+            // 
+            // opPar
+            // 
+            this.opPar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.opPar.Location = new System.Drawing.Point(207, 296);
+            this.opPar.Name = "opPar";
+            this.opPar.Size = new System.Drawing.Size(124, 58);
+            this.opPar.TabIndex = 22;
+            this.opPar.Text = "(";
+            this.opPar.UseVisualStyleBackColor = true;
+            this.opPar.Click += new System.EventHandler(this.opPar_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(470, 360);
-            this.Controls.Add(this.ioScreen);
+            this.Controls.Add(this.opPar);
+            this.Controls.Add(this.clPar);
             this.Controls.Add(this.ans);
             this.Controls.Add(this.backspace);
             this.Controls.Add(this.clear);
@@ -323,7 +338,8 @@ namespace Calculator
         private System.Windows.Forms.Button clear;
         private System.Windows.Forms.Button backspace;
         private System.Windows.Forms.Button ans;
-        private System.Windows.Forms.RichTextBox ioScreen;
+        private System.Windows.Forms.Button clPar;
+        private System.Windows.Forms.Button opPar;
     }
 }
 
