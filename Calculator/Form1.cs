@@ -21,5 +21,30 @@ namespace Calculator
         {
 
         }
+
+        private void btn2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void equal_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_dot_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn0_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
