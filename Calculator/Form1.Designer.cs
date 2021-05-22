@@ -51,6 +51,7 @@ namespace Calculator
             this.ans = new System.Windows.Forms.Button();
             this.clPar = new System.Windows.Forms.Button();
             this.opPar = new System.Windows.Forms.Button();
+            this.ioScreen = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // btn1
@@ -283,11 +284,21 @@ namespace Calculator
             this.opPar.UseVisualStyleBackColor = true;
             this.opPar.Click += new System.EventHandler(this.opPar_Click);
             // 
+            // ioScreen
+            // 
+            this.ioScreen.Location = new System.Drawing.Point(12, 12);
+            this.ioScreen.Name = "ioScreen";
+            this.ioScreen.Size = new System.Drawing.Size(446, 86);
+            this.ioScreen.TabIndex = 23;
+            this.ioScreen.Text = "";
+            this.ioScreen.TextChanged += new System.EventHandler(this.ioScreen_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(470, 360);
+            this.Controls.Add(this.ioScreen);
             this.Controls.Add(this.opPar);
             this.Controls.Add(this.clPar);
             this.Controls.Add(this.ans);
@@ -340,6 +351,7 @@ namespace Calculator
         private System.Windows.Forms.Button ans;
         private System.Windows.Forms.Button clPar;
         private System.Windows.Forms.Button opPar;
+        private System.Windows.Forms.RichTextBox ioScreen;
     }
 }
 

@@ -17,6 +17,11 @@ namespace Calculator
             InitializeComponent();
         }
 
+        private void ioScreen_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void plus_Click(object sender, EventArgs e)
         {
 
