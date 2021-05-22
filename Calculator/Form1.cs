@@ -27,6 +27,11 @@ namespace Calculator
 
         }
 
+        private void neg_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btn0_Click(object sender, EventArgs e)
         {
 
@@ -76,5 +81,6 @@ namespace Calculator
         {
 
         }
+
     }
 }

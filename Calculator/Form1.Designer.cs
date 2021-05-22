@@ -41,11 +41,12 @@ namespace Calculator
             this.btn7 = new System.Windows.Forms.Button();
             this.btn8 = new System.Windows.Forms.Button();
             this.btn9 = new System.Windows.Forms.Button();
+            this.neg = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn1
             // 
-            this.btn1.Location = new System.Drawing.Point(12, 296);
+            this.btn1.Location = new System.Drawing.Point(12, 232);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(59, 58);
             this.btn1.TabIndex = 0;
@@ -55,7 +56,7 @@ namespace Calculator
             // 
             // btn2
             // 
-            this.btn2.Location = new System.Drawing.Point(77, 296);
+            this.btn2.Location = new System.Drawing.Point(77, 232);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(59, 58);
             this.btn2.TabIndex = 1;
@@ -65,7 +66,7 @@ namespace Calculator
             // 
             // btn3
             // 
-            this.btn3.Location = new System.Drawing.Point(142, 296);
+            this.btn3.Location = new System.Drawing.Point(142, 232);
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(59, 58);
             this.btn3.TabIndex = 2;
@@ -86,7 +87,7 @@ namespace Calculator
             // btn_dot
             // 
             this.btn_dot.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_dot.Location = new System.Drawing.Point(142, 232);
+            this.btn_dot.Location = new System.Drawing.Point(12, 296);
             this.btn_dot.Name = "btn_dot";
             this.btn_dot.Size = new System.Drawing.Size(59, 58);
             this.btn_dot.TabIndex = 4;
@@ -96,7 +97,7 @@ namespace Calculator
             // 
             // btn0
             // 
-            this.btn0.Location = new System.Drawing.Point(77, 232);
+            this.btn0.Location = new System.Drawing.Point(77, 296);
             this.btn0.Name = "btn0";
             this.btn0.Size = new System.Drawing.Size(59, 58);
             this.btn0.TabIndex = 5;
@@ -106,7 +107,7 @@ namespace Calculator
             // 
             // btn4
             // 
-            this.btn4.Location = new System.Drawing.Point(12, 232);
+            this.btn4.Location = new System.Drawing.Point(12, 168);
             this.btn4.Name = "btn4";
             this.btn4.Size = new System.Drawing.Size(59, 58);
             this.btn4.TabIndex = 6;
@@ -116,7 +117,7 @@ namespace Calculator
             // 
             // btn5
             // 
-            this.btn5.Location = new System.Drawing.Point(142, 168);
+            this.btn5.Location = new System.Drawing.Point(77, 168);
             this.btn5.Name = "btn5";
             this.btn5.Size = new System.Drawing.Size(59, 58);
             this.btn5.TabIndex = 7;
@@ -126,7 +127,7 @@ namespace Calculator
             // 
             // btn6
             // 
-            this.btn6.Location = new System.Drawing.Point(77, 168);
+            this.btn6.Location = new System.Drawing.Point(142, 168);
             this.btn6.Name = "btn6";
             this.btn6.Size = new System.Drawing.Size(59, 58);
             this.btn6.TabIndex = 8;
@@ -136,7 +137,7 @@ namespace Calculator
             // 
             // btn7
             // 
-            this.btn7.Location = new System.Drawing.Point(12, 168);
+            this.btn7.Location = new System.Drawing.Point(12, 104);
             this.btn7.Name = "btn7";
             this.btn7.Size = new System.Drawing.Size(59, 58);
             this.btn7.TabIndex = 9;
@@ -146,7 +147,7 @@ namespace Calculator
             // 
             // btn8
             // 
-            this.btn8.Location = new System.Drawing.Point(142, 104);
+            this.btn8.Location = new System.Drawing.Point(77, 104);
             this.btn8.Name = "btn8";
             this.btn8.Size = new System.Drawing.Size(59, 58);
             this.btn8.TabIndex = 10;
@@ -156,7 +157,7 @@ namespace Calculator
             // 
             // btn9
             // 
-            this.btn9.Location = new System.Drawing.Point(77, 104);
+            this.btn9.Location = new System.Drawing.Point(142, 104);
             this.btn9.Name = "btn9";
             this.btn9.Size = new System.Drawing.Size(59, 58);
             this.btn9.TabIndex = 11;
@@ -164,11 +165,22 @@ namespace Calculator
             this.btn9.UseVisualStyleBackColor = true;
             this.btn9.Click += new System.EventHandler(this.btn9_Click);
             // 
+            // neg
+            // 
+            this.neg.Location = new System.Drawing.Point(142, 296);
+            this.neg.Name = "neg";
+            this.neg.Size = new System.Drawing.Size(59, 58);
+            this.neg.TabIndex = 12;
+            this.neg.Text = "neg";
+            this.neg.UseVisualStyleBackColor = true;
+            this.neg.Click += new System.EventHandler(this.neg_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(344, 366);
+            this.Controls.Add(this.neg);
             this.Controls.Add(this.btn9);
             this.Controls.Add(this.btn8);
             this.Controls.Add(this.btn7);
@@ -201,6 +213,7 @@ namespace Calculator
         private System.Windows.Forms.Button btn7;
         private System.Windows.Forms.Button btn8;
         private System.Windows.Forms.Button btn9;
+        private System.Windows.Forms.Button neg;
     }
 }
 
