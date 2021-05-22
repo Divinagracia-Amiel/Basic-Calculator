@@ -17,6 +17,21 @@ namespace Calculator
             InitializeComponent();
         }
 
+        private void equal_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_dot_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn0_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btn1_Click(object sender, EventArgs e)
         {
 
@@ -32,17 +47,32 @@ namespace Calculator
 
         }
 
-        private void equal_Click(object sender, EventArgs e)
+        private void btn4_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btn_dot_Click(object sender, EventArgs e)
+        private void btn5_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btn0_Click(object sender, EventArgs e)
+        private void btn6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn9_Click(object sender, EventArgs e)
         {
 
         }
