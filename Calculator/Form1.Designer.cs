@@ -42,6 +42,13 @@ namespace Calculator
             this.btn8 = new System.Windows.Forms.Button();
             this.btn9 = new System.Windows.Forms.Button();
             this.neg = new System.Windows.Forms.Button();
+            this.plus = new System.Windows.Forms.Button();
+            this.minus = new System.Windows.Forms.Button();
+            this.mult = new System.Windows.Forms.Button();
+            this.div = new System.Windows.Forms.Button();
+            this.clear = new System.Windows.Forms.Button();
+            this.backspace = new System.Windows.Forms.Button();
+            this.ans = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn1
@@ -76,7 +83,8 @@ namespace Calculator
             // 
             // equal
             // 
-            this.equal.Location = new System.Drawing.Point(207, 296);
+            this.equal.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.equal.Location = new System.Drawing.Point(337, 296);
             this.equal.Name = "equal";
             this.equal.Size = new System.Drawing.Size(124, 58);
             this.equal.TabIndex = 3;
@@ -175,11 +183,94 @@ namespace Calculator
             this.neg.UseVisualStyleBackColor = true;
             this.neg.Click += new System.EventHandler(this.neg_Click);
             // 
+            // plus
+            // 
+            this.plus.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.plus.Location = new System.Drawing.Point(207, 232);
+            this.plus.Name = "plus";
+            this.plus.Size = new System.Drawing.Size(124, 58);
+            this.plus.TabIndex = 13;
+            this.plus.Text = "+";
+            this.plus.UseVisualStyleBackColor = true;
+            this.plus.Click += new System.EventHandler(this.plus_Click);
+            // 
+            // minus
+            // 
+            this.minus.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.minus.Location = new System.Drawing.Point(207, 296);
+            this.minus.Name = "minus";
+            this.minus.Size = new System.Drawing.Size(124, 58);
+            this.minus.TabIndex = 14;
+            this.minus.Text = "-";
+            this.minus.UseVisualStyleBackColor = true;
+            this.minus.Click += new System.EventHandler(this.minus_Click);
+            // 
+            // mult
+            // 
+            this.mult.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mult.Location = new System.Drawing.Point(207, 104);
+            this.mult.Name = "mult";
+            this.mult.Size = new System.Drawing.Size(124, 58);
+            this.mult.TabIndex = 15;
+            this.mult.Text = "×";
+            this.mult.UseVisualStyleBackColor = true;
+            // 
+            // div
+            // 
+            this.div.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.div.Location = new System.Drawing.Point(207, 168);
+            this.div.Name = "div";
+            this.div.Size = new System.Drawing.Size(124, 58);
+            this.div.TabIndex = 16;
+            this.div.Text = "÷";
+            this.div.UseVisualStyleBackColor = true;
+            this.div.Click += new System.EventHandler(this.div_Click);
+            // 
+            // clear
+            // 
+            this.clear.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clear.Location = new System.Drawing.Point(337, 170);
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(124, 58);
+            this.clear.TabIndex = 17;
+            this.clear.Text = "C";
+            this.clear.UseVisualStyleBackColor = true;
+            this.clear.Click += new System.EventHandler(this.clear_Click);
+            // 
+            // backspace
+            // 
+            this.backspace.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backspace.Location = new System.Drawing.Point(337, 104);
+            this.backspace.Name = "backspace";
+            this.backspace.Size = new System.Drawing.Size(124, 58);
+            this.backspace.TabIndex = 18;
+            this.backspace.Text = "⌫";
+            this.backspace.UseVisualStyleBackColor = true;
+            this.backspace.Click += new System.EventHandler(this.backspace_Click);
+            // 
+            // ans
+            // 
+            this.ans.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ans.Location = new System.Drawing.Point(337, 232);
+            this.ans.Name = "ans";
+            this.ans.Size = new System.Drawing.Size(124, 58);
+            this.ans.TabIndex = 19;
+            this.ans.Text = "ans";
+            this.ans.UseVisualStyleBackColor = true;
+            this.ans.Click += new System.EventHandler(this.ans_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 366);
+            this.ClientSize = new System.Drawing.Size(470, 360);
+            this.Controls.Add(this.ans);
+            this.Controls.Add(this.backspace);
+            this.Controls.Add(this.clear);
+            this.Controls.Add(this.div);
+            this.Controls.Add(this.mult);
+            this.Controls.Add(this.minus);
+            this.Controls.Add(this.plus);
             this.Controls.Add(this.neg);
             this.Controls.Add(this.btn9);
             this.Controls.Add(this.btn8);
@@ -214,6 +305,13 @@ namespace Calculator
         private System.Windows.Forms.Button btn8;
         private System.Windows.Forms.Button btn9;
         private System.Windows.Forms.Button neg;
+        private System.Windows.Forms.Button plus;
+        private System.Windows.Forms.Button minus;
+        private System.Windows.Forms.Button mult;
+        private System.Windows.Forms.Button div;
+        private System.Windows.Forms.Button clear;
+        private System.Windows.Forms.Button backspace;
+        private System.Windows.Forms.Button ans;
     }
 }
 

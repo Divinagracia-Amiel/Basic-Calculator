@@ -82,5 +82,34 @@ namespace Calculator
 
         }
 
+        private void plus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void minus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void div_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clear_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void backspace_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ans_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
