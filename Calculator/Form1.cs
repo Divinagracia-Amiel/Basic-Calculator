@@ -24,17 +24,22 @@ namespace Calculator
 
         private void plus_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + "+";
         }
 
         private void minus_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + "-";
         }
 
         private void div_Click(object sender, EventArgs e)
         {
+            ioScreen.Text = ioScreen.Text + "÷";
+        }
 
+        private void mult_Click(object sender, EventArgs e)
+        {
+            ioScreen.Text = ioScreen.Text + "×";
         }
 
         private void clear_Click(object sender, EventArgs e)
@@ -59,72 +64,72 @@ namespace Calculator
 
         private void btn_dot_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + ".";
         }
 
         private void neg_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = "-" + ioScreen.Text;
         }
 
         private void clPar_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + ")";
         }
 
         private void opPar_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + "(";
         }
 
         private void btn0_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + "0";
         }
 
         private void btn1_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + "1";
         }
 
         private void btn2_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + "2";
         }
 
         private void btn3_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + "3";
         }
 
         private void btn4_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + "4";
         }
 
         private void btn5_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + "5";
         }
 
         private void btn6_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + "6";
         }
 
         private void btn7_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + "7";
         }
 
         private void btn8_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + "8";
         }
 
         private void btn9_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = ioScreen.Text + "9";
         }
 
     }

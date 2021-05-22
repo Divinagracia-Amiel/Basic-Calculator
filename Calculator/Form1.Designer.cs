@@ -217,6 +217,7 @@ namespace Calculator
             this.mult.TabIndex = 15;
             this.mult.Text = "×";
             this.mult.UseVisualStyleBackColor = true;
+            this.mult.Click += new System.EventHandler(this.mult_Click);
             // 
             // div
             // 
