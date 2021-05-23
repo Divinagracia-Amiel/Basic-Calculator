@@ -52,25 +52,55 @@ namespace Calculator
 
         private void clear_Click(object sender, EventArgs e)
         {
-
+            ioScreen.Text = String.Empty;
+            n = "0";
+            res = 0;
         }
 
         private void backspace_Click(object sender, EventArgs e)
         {
-
+            if (ioScreen.Text.Length >= 1)
+            {
+                int end_io = ioScreen.Text.Length;
+                char idx_end_io_ch = ioScreen.Text[end_io - 1];
+                string idx_end_io = idx_end_io_ch.ToString();
+                ioScreen.Text = ioScreen.Text.Remove(end_io - 1, 1);
+                             
+                if (idx_end_io == "+")
+                {
+                    res = 0;
+                }
+            }
+            
+            if (n.Length >= 1)
+            {
+                int end_n = n.Length;
+                n = n.Remove(end_n - 1, 1);
+            }
+            
         }
 
         private void ans_Click(object sender, EventArgs e)
         {
-
+           
+            ioScreen.Text = ioScreen.Text + "ans";
         }
 
         private void equal_Click(object sender, EventArgs e)
         {
-            res = res + Convert.ToDouble(n);
-            ioScreen.Text = String.Empty;
-            ioScreen.Text = res.ToString();
-            n = "0";
+            if (ioScreen.Text.Contains("+") == true)
+            {
+                res = res + Convert.ToDouble(n);
+                ioScreen.Text = String.Empty;
+                ioScreen.Text = res.ToString();
+                n = "0";
+            }
+
+            else
+            {
+               
+            }
+         
         }
 
         private void btn_dot_Click(object sender, EventArgs e)
