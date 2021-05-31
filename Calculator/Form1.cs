@@ -13,13 +13,36 @@ namespace Calculator
     public partial class Form1 : Form
     {
         string n = "";
-        string op;
+        int init_count; //for checking what order an operator is
         double res;
+        int dict_quan; //Quantity of keys in dictionary
+        int nth = 0; //nth key or nth operands
+        IDictionary<int, int> nums = new Dictionary<int, int>(); //dictionary for nth operand and its value
+        IDictionary<int, string> ops = new Dictionary<int, string>(); //dictionary for nth operators
         public Form1()
         {
             InitializeComponent();
         }
 
+        private int dict_check()
+        {
+            dict_quan = nums.Count;
+            return dict_quan;
+        }
+
+        private int ops_check()
+        {
+            nth = 0;
+            dict_quan = dict_check();
+            for (int i = 0; i <= dict_quan ; i++)
+            {
+                nth++;
+                if (ops[i] == "×")
+                {
+
+                }
+            }
+        }
         private void ioScreen_TextChanged(object sender, EventArgs e)
         {
 
@@ -30,11 +53,12 @@ namespace Calculator
             {
                 if (ioScreen.Text != "" || n != "")
                 {
-                    ioScreen.Text = ioScreen.Text + " + ";
-                    res = res + Convert.ToDouble(n);
-                    op = "+";
-                    n = "";
-                }               
+                    nth++;
+                    nums.Add(nth, int.Parse(n));
+                    ops.Add(nth, "+");
+                    ioScreen.Text = ioScreen.Text + " + ";                  
+                    n = "";                  
+                }
             }                
         }
 
@@ -97,19 +121,25 @@ namespace Calculator
 
         private void equal_Click(object sender, EventArgs e)
         {
-            if (ioScreen.Text.Contains("+") == true)
+            nth++;
+            nums.Add(nth, int.Parse(n));
+            dict_quan = dict_check();
+            if (ioScreen.Text.Contains("×") == true)
             {
-                res = res + Convert.ToDouble(n);
-                ioScreen.Text = String.Empty;
-                ioScreen.Text = res.ToString();
-                n = "0";
-            }
 
-            else
-            {
-               
             }
-         
+            if (ioScreen.Text.Contains("÷") == true)
+            {
+
+            }
+            for (int i = 1; i < dict_quan + 1; i++)
+            {
+                if (ops[i] == "+")
+                {
+                    res += nums[i];
+                }             
+            }
+            ioScreen.Text = res.ToString();
         }
 
         private void btn_dot_Click(object sender, EventArgs e)
@@ -192,5 +222,9 @@ namespace Calculator
             ioScreen.Text = ioScreen.Text + "9";
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
