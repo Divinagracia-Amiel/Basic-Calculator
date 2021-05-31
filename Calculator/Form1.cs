@@ -28,10 +28,13 @@ namespace Calculator
         private void plus_Click(object sender, EventArgs e)
         {
             {
-                ioScreen.Text = ioScreen.Text + " + ";
-                res = res + Convert.ToDouble(n);             
-                op = "+";
-                n = "";
+                if (ioScreen.Text != "" || n != "")
+                {
+                    ioScreen.Text = ioScreen.Text + " + ";
+                    res = res + Convert.ToDouble(n);
+                    op = "+";
+                    n = "";
+                }               
             }                
         }
 
@@ -59,7 +62,13 @@ namespace Calculator
 
         private void backspace_Click(object sender, EventArgs e)
         {
-            if (ioScreen.Text.Length >= 1)
+            if (ioScreen.Text == "")
+            {
+                n = "0";
+                res = 0;
+            }
+
+            else if (ioScreen.Text.Length >= 1)
             {
                 int end_io = ioScreen.Text.Length;
                 char idx_end_io_ch = ioScreen.Text[end_io - 1];
