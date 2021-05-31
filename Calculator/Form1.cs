@@ -17,7 +17,10 @@ namespace Calculator
         double res;
         int dict_quan; //Quantity of keys in dictionary
         int nth = 0; //nth key or nth operands
-        IDictionary<int, int> nums = new Dictionary<int, int>(); //dictionary for nth operand and its value
+        string multSym = "×";
+        string divSym = "÷";
+        string op_rep;
+        IDictionary<int, double> nums = new Dictionary<int, double>(); //dictionary for nth operand and its value
         IDictionary<int, string> ops = new Dictionary<int, string>(); //dictionary for nth operators
         public Form1()
         {
@@ -30,19 +33,59 @@ namespace Calculator
             return dict_quan;
         }
 
-        private int ops_check()
+        private int ops_check(string op)
         {
-            nth = 0;
-            dict_quan = dict_check();
-            for (int i = 0; i <= dict_quan ; i++)
-            {
-                nth++;
-                if (ops[i] == "×")
+            init_count = dict_check() - 1;
+            if (op == multSym)
+            {               
+                for (int i = 1; i <= init_count; i++)
                 {
-
+                    if (ops[i] == multSym)
+                    {
+                        return i;
+                    }
                 }
             }
+            else if (op == divSym)
+            {
+                for (int i = 1; i <= init_count; i++)
+                {
+                    if (ops[i] == divSym)
+                    {
+                        return i;
+                    }
+                }
+            }
+            return 1;
         }
+
+        private bool ops_contains(string op)
+        {
+            init_count = dict_check() - 1;
+            if (op == multSym)
+            {
+                for (int i = 1; i <= init_count; i++)
+                {
+                    if (ops[i] == multSym)
+                    {
+                        return true;
+                    }
+                }             
+            }
+            else if (op == divSym)
+            {
+                for (int i = 1; i <= init_count; i++)
+                {
+                    if (ops[i] == divSym)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
         private void ioScreen_TextChanged(object sender, EventArgs e)
         {
 
@@ -50,38 +93,60 @@ namespace Calculator
 
         private void plus_Click(object sender, EventArgs e)
         {
-            {
-                if (ioScreen.Text != "" || n != "")
-                {
-                    nth++;
-                    nums.Add(nth, int.Parse(n));
-                    ops.Add(nth, "+");
-                    ioScreen.Text = ioScreen.Text + " + ";                  
-                    n = "";                  
-                }
-            }                
+
+            if (ioScreen.Text != "" || n != "")
+            {    
+                nth++;
+                nums.Add(nth, int.Parse(n));
+                ops.Add(nth, "+");
+                ioScreen.Text = ioScreen.Text + " + ";                  
+                n = "";                  
+            }               
         }
 
         private void minus_Click(object sender, EventArgs e)
         {
-            ioScreen.Text = ioScreen.Text + " - ";
+            if (ioScreen.Text != "" || n != "")
+            {
+                nth++;
+                nums.Add(nth, int.Parse(n));
+                ops.Add(nth, "-");
+                ioScreen.Text = ioScreen.Text + " - ";
+                n = "";
+            }
         }
 
         private void div_Click(object sender, EventArgs e)
         {
-            ioScreen.Text = ioScreen.Text + " ÷ ";
+            if (ioScreen.Text != "" || n != "")
+            {
+                nth++;
+                nums.Add(nth, int.Parse(n));
+                ops.Add(nth, divSym);
+                ioScreen.Text = ioScreen.Text + " ÷ ";
+                n = "";
+            }            
         }
 
         private void mult_Click(object sender, EventArgs e)
         {
-            ioScreen.Text = ioScreen.Text + " × ";
+            if (ioScreen.Text != "" || n != "")
+            {
+                nth++;
+                nums.Add(nth, int.Parse(n));
+                ops.Add(nth, multSym);
+                ioScreen.Text = ioScreen.Text + " × ";
+                n = "";
+            }
         }
 
         private void clear_Click(object sender, EventArgs e)
         {
             ioScreen.Text = String.Empty;
-            n = "0";
             res = 0;
+            ops.Clear();
+            nums.Clear();
+            n = "0";
         }
 
         private void backspace_Click(object sender, EventArgs e)
@@ -90,6 +155,8 @@ namespace Calculator
             {
                 n = "0";
                 res = 0;
+                ops.Clear();
+                nums.Clear();
             }
 
             else if (ioScreen.Text.Length >= 1)
@@ -123,23 +190,63 @@ namespace Calculator
         {
             nth++;
             nums.Add(nth, int.Parse(n));
+            while (ops_contains(multSym) == true)
+            {
+                nth = ops_check(multSym);
+                for (int i = nth; i <= nth; i++)
+                {
+                    if (res == 0)
+                    {
+                        res = nums[i] * nums[i+1];
+                    }
+                    else if (res != 0)
+                    {
+                        res *= nums[i+1];   
+                    }
+                }
+                nums.Remove(nth + 1);
+                ops.Remove(nth);
+                op_rep = ops[nth + 1];
+                ops[nth - 1] = op_rep;
+                nums[nth] = res;
+            }
+            while (ops_contains(divSym) == true)
+            {
+                nth = ops_check(multSym);
+                for (int i = nth; i <= nth; i++)
+                {
+                    if (res == 0)
+                    {
+                        res = nums[i] / nums[i + 1];
+                    }
+                    else if (res != 0)
+                    {
+                        res /= nums[i + 1];
+                    }
+                }
+                nums.Remove(nth + 1);
+                ops.Remove(nth);
+                op_rep = ops[nth + 1];
+                ops[nth - 1] = op_rep;
+                nums[nth] = res;
+            }
             dict_quan = dict_check();
-            if (ioScreen.Text.Contains("×") == true)
-            {
-
-            }
-            if (ioScreen.Text.Contains("÷") == true)
-            {
-
-            }
-            for (int i = 1; i < dict_quan + 1; i++)
+            for (int i = 1; i < dict_quan; i++)
             {
                 if (ops[i] == "+")
                 {
                     res += nums[i];
-                }             
+                }
+                else if (ops[i] == "-")
+                {
+                    res -= nums[i];
+                }
             }
             ioScreen.Text = res.ToString();
+            ops.Clear();
+            nums.Clear();
+            nth = 1;
+            nums.Add(nth, res);
         }
 
         private void btn_dot_Click(object sender, EventArgs e)
