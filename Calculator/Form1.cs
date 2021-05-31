@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Calculator
@@ -20,8 +15,9 @@ namespace Calculator
         string multSym = "×";
         string divSym = "÷";
         string op_rep;
-        IDictionary<int, double> nums = new Dictionary<int, double>(); //dictionary for nth operand and its value
-        IDictionary<int, string> ops = new Dictionary<int, string>(); //dictionary for nth operators
+        double num_rep;
+        List<double> nums = new List<double>(); //list for nth operand and its value
+        List<string> ops = new List<string>(); //list for nth operators
         public Form1()
         {
             InitializeComponent();
@@ -29,7 +25,7 @@ namespace Calculator
 
         private int dict_check()
         {
-            dict_quan = nums.Count;
+            dict_quan = nums.Count();
             return dict_quan;
         }
 
@@ -38,7 +34,7 @@ namespace Calculator
             init_count = dict_check() - 1;
             if (op == multSym)
             {               
-                for (int i = 1; i <= init_count; i++)
+                for (int i = 0; i < init_count; i++)
                 {
                     if (ops[i] == multSym)
                     {
@@ -48,7 +44,7 @@ namespace Calculator
             }
             else if (op == divSym)
             {
-                for (int i = 1; i <= init_count; i++)
+                for (int i = 0 ; i < init_count; i++)
                 {
                     if (ops[i] == divSym)
                     {
@@ -64,7 +60,7 @@ namespace Calculator
             init_count = dict_check() - 1;
             if (op == multSym)
             {
-                for (int i = 1; i <= init_count; i++)
+                for (int i = 0; i < init_count; i++)
                 {
                     if (ops[i] == multSym)
                     {
@@ -74,7 +70,7 @@ namespace Calculator
             }
             else if (op == divSym)
             {
-                for (int i = 1; i <= init_count; i++)
+                for (int i = 0; i < init_count; i++)
                 {
                     if (ops[i] == divSym)
                     {
@@ -97,8 +93,8 @@ namespace Calculator
             if (ioScreen.Text != "" || n != "")
             {    
                 nth++;
-                nums.Add(nth, int.Parse(n));
-                ops.Add(nth, "+");
+                nums.Add(double.Parse(n));
+                ops.Add("+");
                 ioScreen.Text = ioScreen.Text + " + ";                  
                 n = "";                  
             }               
@@ -109,8 +105,8 @@ namespace Calculator
             if (ioScreen.Text != "" || n != "")
             {
                 nth++;
-                nums.Add(nth, int.Parse(n));
-                ops.Add(nth, "-");
+                nums.Add(double.Parse(n));
+                ops.Add("-");
                 ioScreen.Text = ioScreen.Text + " - ";
                 n = "";
             }
@@ -121,8 +117,8 @@ namespace Calculator
             if (ioScreen.Text != "" || n != "")
             {
                 nth++;
-                nums.Add(nth, int.Parse(n));
-                ops.Add(nth, divSym);
+                nums.Add(double.Parse(n));
+                ops.Add(divSym);
                 ioScreen.Text = ioScreen.Text + " ÷ ";
                 n = "";
             }            
@@ -133,8 +129,8 @@ namespace Calculator
             if (ioScreen.Text != "" || n != "")
             {
                 nth++;
-                nums.Add(nth, int.Parse(n));
-                ops.Add(nth, multSym);
+                nums.Add(double.Parse(n));
+                ops.Add(multSym);
                 ioScreen.Text = ioScreen.Text + " × ";
                 n = "";
             }
@@ -189,7 +185,7 @@ namespace Calculator
         private void equal_Click(object sender, EventArgs e)
         {
             nth++;
-            nums.Add(nth, int.Parse(n));
+            nums.Add(double.Parse(n));
             while (ops_contains(multSym) == true)
             {
                 nth = ops_check(multSym);
@@ -204,11 +200,9 @@ namespace Calculator
                         res *= nums[i+1];   
                     }
                 }
-                nums.Remove(nth + 1);
-                ops.Remove(nth);
-                op_rep = ops[nth + 1];
-                ops[nth - 1] = op_rep;
-                nums[nth] = res;
+                nums.RemoveRange(nth, 2);
+                ops.RemoveAt(nth);
+                nums.Insert(nth, res);
             }
             while (ops_contains(divSym) == true)
             {
@@ -224,14 +218,12 @@ namespace Calculator
                         res /= nums[i + 1];
                     }
                 }
-                nums.Remove(nth + 1);
-                ops.Remove(nth);
-                op_rep = ops[nth + 1];
-                ops[nth - 1] = op_rep;
-                nums[nth] = res;
+                nums.RemoveRange(nth, 2);
+                ops.RemoveAt(nth);
+                nums.Insert(nth, res);
             }
             dict_quan = dict_check();
-            for (int i = 1; i < dict_quan; i++)
+            for (int i = 0; i < dict_quan-1; i++)
             {
                 if (ops[i] == "+")
                 {
@@ -245,12 +237,12 @@ namespace Calculator
             ioScreen.Text = res.ToString();
             ops.Clear();
             nums.Clear();
-            nth = 1;
-            nums.Add(nth, res);
+            nums.Add(res);
         }
 
         private void btn_dot_Click(object sender, EventArgs e)
         {
+            n = n + ".";
             ioScreen.Text = ioScreen.Text + ".";
         }
 
