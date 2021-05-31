@@ -14,8 +14,9 @@ namespace Calculator
         int nth = 0; //nth key or nth operands
         string multSym = "×";
         string divSym = "÷";
-        string op_rep;
-        double num_rep;
+        string addSym = "+";
+        string subSym = "-";
+        bool first_input = true;
         List<double> nums = new List<double>(); //list for nth operand and its value
         List<string> ops = new List<string>(); //list for nth operators
         public Form1()
@@ -77,6 +78,26 @@ namespace Calculator
                         return true;
                     }
                 }
+            }
+            else if (op == addSym)
+            {
+                for (int i = 0; i < init_count; i++)
+                {
+                    if (ops[i] == "+")
+                    {
+                        return true;
+                    }
+                }
+            }
+            else if (op == subSym)
+            {
+                for (int i = 0; i < init_count; i++)
+                {
+                    if (ops[i] == "-")
+                    {
+                        return true;
+                    }
+                }             
             }
             return false;
         }
@@ -143,6 +164,7 @@ namespace Calculator
             ops.Clear();
             nums.Clear();
             n = "0";
+            first_input = true;
         }
 
         private void backspace_Click(object sender, EventArgs e)
@@ -191,11 +213,12 @@ namespace Calculator
                 nth = ops_check(multSym);
                 for (int i = nth; i <= nth; i++)
                 {
-                    if (res == 0)
+                    if (first_input == true)
                     {
                         res = nums[i] * nums[i+1];
+                        first_input = false;
                     }
-                    else if (res != 0)
+                    else
                     {
                         res *= nums[i+1];   
                     }
@@ -206,14 +229,15 @@ namespace Calculator
             }
             while (ops_contains(divSym) == true)
             {
-                nth = ops_check(multSym);
+                nth = ops_check(divSym);
                 for (int i = nth; i <= nth; i++)
                 {
-                    if (res == 0)
+                    if (first_input == true)
                     {
                         res = nums[i] / nums[i + 1];
+                        first_input = false;
                     }
-                    else if (res != 0)
+                    else
                     {
                         res /= nums[i + 1];
                     }
@@ -222,17 +246,43 @@ namespace Calculator
                 ops.RemoveAt(nth);
                 nums.Insert(nth, res);
             }
-            dict_quan = dict_check();
-            for (int i = 0; i < dict_quan-1; i++)
+            while (ops_contains(addSym) == true)
             {
-                if (ops[i] == "+")
+                nth = ops_check(addSym);
+                for (int i = nth; i <= nth; i++)
                 {
-                    res += nums[i];
+                    if (first_input == true)
+                    {
+                        res = nums[i] + nums[i + 1];
+                        first_input = false;
+                    }
+                    else
+                    {
+                        res += nums[i + 1];
+                    }
                 }
-                else if (ops[i] == "-")
+                nums.RemoveRange(nth, 2);
+                ops.RemoveAt(nth);
+                nums.Insert(nth, res);
+            }
+            while (ops_contains(subSym) == true)
+            {
+                nth = ops_check(subSym);
+                for (int i = nth; i <= nth; i++)
                 {
-                    res -= nums[i];
+                    if (first_input == true)
+                    {
+                        res = nums[i] - nums[i + 1];
+                        first_input = false;
+                    }
+                    else
+                    {
+                        res -= nums[i + 1];
+                    }
                 }
+                nums.RemoveRange(nth, 2);
+                ops.RemoveAt(nth);
+                nums.Insert(nth, res);
             }
             ioScreen.Text = res.ToString();
             ops.Clear();
