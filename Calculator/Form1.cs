@@ -16,7 +16,7 @@ namespace Calculator
         string divSym = "÷";
         string addSym = "+";
         string subSym = "-";
-        bool first_input = true;
+        bool reset = true;
         List<double> nums = new List<double>(); //list for nth operand and its value
         List<string> ops = new List<string>(); //list for nth operators
         public Form1()
@@ -144,7 +144,7 @@ namespace Calculator
             ops.Clear();
             nums.Clear();
             n = "0";
-            first_input = true;
+            reset = true;
         }
 
         private void backspace_Click(object sender, EventArgs e)
@@ -193,49 +193,35 @@ namespace Calculator
                 nth = ops_check(multSym);
                 for (int i = nth; i <= nth; i++)
                 {
-                    if (first_input == true)
-                    {
-                        res = nums[i] * nums[i+1];
-                        first_input = false;
-                    }
-                    else
-                    {
-                        res *= nums[i+1];   
-                    }
+                    res = 0;
+                    res = nums[i] * nums[i+1];
+                    nums.RemoveRange(nth, 2);
+                    ops.RemoveAt(nth);
+                    nums.Insert(nth, res);                  
                 }
-                nums.RemoveRange(nth, 2);
-                ops.RemoveAt(nth);
-                nums.Insert(nth, res);
             }
             while (ops_contains(divSym) == true)
             {
                 nth = ops_check(divSym);
                 for (int i = nth; i <= nth; i++)
                 {
-                    if (first_input == true)
-                    {
-                        res = nums[i] / nums[i + 1];
-                        first_input = false;
-                    }
-                    else
-                    {
-                        res /= nums[i + 1];
-                    }
+                    res = 0;
+                    res = nums[i] / nums[i + 1];
+                    nums.RemoveRange(nth, 2);
+                    ops.RemoveAt(nth);
+                    nums.Insert(nth, res);                  
                 }
-                nums.RemoveRange(nth, 2);
-                ops.RemoveAt(nth);
-                nums.Insert(nth, res);
             }
             dict_quan = dict_check();
-            first_input = true;
+            reset = true;
             for (int i = 0; i < dict_quan-1; i++)
             {
                 if (ops[i] == addSym)
                 {
-                    if (first_input == true)
+                    if (reset == true)
                     {
                         res = nums[i] + nums[i + 1];
-                        first_input = false;
+                        reset = false;
                     }
                     else
                     {
@@ -244,10 +230,10 @@ namespace Calculator
                 }
                 if (ops[i] == subSym)
                 {
-                    if (first_input == true)
+                    if (reset == true)
                     {
                         res = nums[i] - nums[i + 1];
-                        first_input = false;
+                        reset = false;
                     }
                     else
                     {
