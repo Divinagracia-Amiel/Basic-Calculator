@@ -12,11 +12,13 @@ namespace Calculator
         double res;
         int dict_quan; //Quantity of keys in dictionary
         int nth = 0; //nth key or nth operands
+        int nth_mult;
+        int nth_div;
         string multSym = "×";
         string divSym = "÷";
         string addSym = "+";
         string subSym = "-";
-        bool reset = true;
+        int first_index;
         List<double> nums = new List<double>(); //list for nth operand and its value
         List<string> ops = new List<string>(); //list for nth operators
         public Form1()
@@ -144,7 +146,6 @@ namespace Calculator
             ops.Clear();
             nums.Clear();
             n = "0";
-            reset = true;
         }
 
         private void backspace_Click(object sender, EventArgs e)
@@ -188,57 +189,56 @@ namespace Calculator
         {
             nth++;
             nums.Add(double.Parse(n));
-            while (ops_contains(multSym) == true)
+            while (ops_contains(multSym) == true || ops_contains(divSym) == true)
             {
-                nth = ops_check(multSym);
-                for (int i = nth; i <= nth; i++)
+                nth_mult = ops_check(multSym);
+                nth_div = ops_check(divSym);
+                if (ops_contains(multSym) == false)
                 {
-                    res = 0;
-                    res = nums[i] * nums[i+1];
-                    nums.RemoveRange(nth, 2);
-                    ops.RemoveAt(nth);
-                    nums.Insert(nth, res);                  
+                    nth_div = nth_mult - 1;
                 }
-            }
-            while (ops_contains(divSym) == true)
-            {
-                nth = ops_check(divSym);
-                for (int i = nth; i <= nth; i++)
+                else if (ops_contains(divSym) == false)
                 {
+                    nth_mult = nth_div - 1;
+                }
+                if (nth_mult < nth_div)
+                {
+                    nth_mult = ops_check(multSym);
                     res = 0;
-                    res = nums[i] / nums[i + 1];
-                    nums.RemoveRange(nth, 2);
-                    ops.RemoveAt(nth);
-                    nums.Insert(nth, res);                  
+                    res = nums[nth_mult] * nums[nth_mult + 1];
+                    nums.RemoveRange(nth_mult, 2);
+                    ops.RemoveAt(nth_mult);
+                    nums.Insert(nth_mult, res);                 
+                }                
+                else if (nth_div < nth_mult)
+                {
+                    nth_div = ops_check(divSym);
+                    res = 0;
+                    res = nums[nth_div] / nums[nth_div + 1];
+                    nums.RemoveRange(nth_div, 2);
+                    ops.RemoveAt(nth_div);
+                    nums.Insert(nth_div, res);
                 }
             }
             dict_quan = dict_check();
-            reset = true;
+            nth = 0;
             for (int i = 0; i < dict_quan-1; i++)
             {
-                if (ops[i] == addSym)
+                if (ops[0] == addSym)
                 {
-                    if (reset == true)
-                    {
-                        res = nums[i] + nums[i + 1];
-                        reset = false;
-                    }
-                    else
-                    {
-                        res += nums[i+1];
-                    }
+                    res = 0;
+                    res = nums[0] + nums[0 + 1];
+                    nums.RemoveRange(nth, 2);
+                    ops.RemoveAt(nth);
+                    nums.Insert(nth, res);             
                 }
-                if (ops[i] == subSym)
+                else if (ops[0] == subSym)
                 {
-                    if (reset == true)
-                    {
-                        res = nums[i] - nums[i + 1];
-                        reset = false;
-                    }
-                    else
-                    {
-                        res -= nums[i+1];
-                    }
+                    res = 0;
+                    res = nums[0] - nums[0 + 1];
+                    nums.RemoveRange(nth, 2);
+                    ops.RemoveAt(nth);
+                    nums.Insert(nth, res);
                 }
             }
             ioScreen.Text = res.ToString();
