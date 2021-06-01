@@ -6,33 +6,41 @@ using System.Windows.Forms;
 namespace Calculator
 {
     public partial class Form1 : Form
-    {
-        string n = "";
+    {                
+        double res;     //result
+        double prev_res; //to store the previous result
         int init_count; //for checking what order an operator is
-        double res;
-        int dict_quan; //Quantity of keys in dictionary
-        int nth = 0; //nth key or nth operands
-        int nth_mult;
-        int nth_div;
-        string multSym = "×";
-        string divSym = "÷";
-        string addSym = "+";
-        string subSym = "-";
-        int first_index;
+        int dict_quan;  //Quantity of keys in dictionary
+        int nth = 0;    //nth key or nth operands
+        int nth_mult; //index of a multiplication symbol
+        int nth_div; //index of a division symbol
+        int end_io;        
+        int end_n;
+        int last_opIndex;
+        int last_numsIndex;
+        char idx_end_io_ch;
+        string multSym = "×";    //Symbol for multiplication
+        string divSym = "÷";     //Symbol for Division
+        string addSym = "+";     //Symbol for Addition
+        string subSym = "-";     //Symbol for subtraction
+        string idx_end_io;
+        string n = "";  //used to make variables seperate
         List<double> nums = new List<double>(); //list for nth operand and its value
         List<string> ops = new List<string>(); //list for nth operators
+        List<string> texts = new List<string>();
         public Form1()
         {
             InitializeComponent();
         }
 
-        private int dict_check()
+        //Methods
+        private int dict_check() //dictionary count
         {
             dict_quan = nums.Count();
             return dict_quan;
         }
 
-        private int ops_check(string op)
+        private int ops_check(string op) //Checks what index in the operation dictionary, is a multiplication or division
         {
             init_count = dict_check() - 1;
             if (op == multSym)
@@ -58,7 +66,7 @@ namespace Calculator
             return 1;
         }
 
-        private bool ops_contains(string op)
+        private bool ops_contains(string op) //Checks whether the operation is in the equation
         {
             init_count = dict_check() - 1;
             if (op == multSym)
@@ -90,10 +98,11 @@ namespace Calculator
 
         }
 
+        //Operation Events
         private void plus_Click(object sender, EventArgs e)
         {
 
-            if (ioScreen.Text != "" || n != "")
+            if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
             {    
                 nth++;
                 nums.Add(double.Parse(n));
@@ -105,7 +114,7 @@ namespace Calculator
 
         private void minus_Click(object sender, EventArgs e)
         {
-            if (ioScreen.Text != "" || n != "")
+            if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
             {
                 nth++;
                 nums.Add(double.Parse(n));
@@ -117,7 +126,7 @@ namespace Calculator
 
         private void div_Click(object sender, EventArgs e)
         {
-            if (ioScreen.Text != "" || n != "")
+            if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
             {
                 nth++;
                 nums.Add(double.Parse(n));
@@ -129,7 +138,7 @@ namespace Calculator
 
         private void mult_Click(object sender, EventArgs e)
         {
-            if (ioScreen.Text != "" || n != "")
+            if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
             {
                 nth++;
                 nums.Add(double.Parse(n));
@@ -138,7 +147,8 @@ namespace Calculator
                 n = "";
             }
         }
-
+       
+        //Other Events
         private void clear_Click(object sender, EventArgs e)
         {
             ioScreen.Text = String.Empty;
@@ -150,6 +160,11 @@ namespace Calculator
 
         private void backspace_Click(object sender, EventArgs e)
         {
+            end_io = ioScreen.Text.Length;
+            end_n = n.Length;
+            last_opIndex = ops.Count();
+            last_numsIndex = nums.Count;
+
             if (ioScreen.Text == "")
             {
                 n = "0";
@@ -157,32 +172,41 @@ namespace Calculator
                 ops.Clear();
                 nums.Clear();
             }
-
-            else if (ioScreen.Text.Length >= 1)
-            {
-                int end_io = ioScreen.Text.Length;
-                char idx_end_io_ch = ioScreen.Text[end_io - 1];
-                string idx_end_io = idx_end_io_ch.ToString();
-                ioScreen.Text = ioScreen.Text.Remove(end_io - 1, 1);
-                             
-                if (idx_end_io == "+")
-                {
-                    res = 0;
-                }
+            if (ioScreen.Text.Length >= 1)
+            {               
+                idx_end_io_ch = ioScreen.Text[end_io - 1];
+                idx_end_io = idx_end_io_ch.ToString();
+                ioScreen.Text = ioScreen.Text.Remove(end_io - 1, 1);                            
             }
             
+            if (idx_end_io == multSym || idx_end_io == divSym || idx_end_io == addSym || idx_end_io == subSym)
+            {             
+                ops.RemoveAt(last_opIndex - 1);
+            }
+
             if (n.Length >= 1)
             {
-                int end_n = n.Length;
                 n = n.Remove(end_n - 1, 1);
             }
-            
+            else if (n.Length < 1 && idx_end_io != " ")
+            {
+                nums.RemoveAt(last_numsIndex - 1);
+            }
+
+        }
+        private void neg_Click(object sender, EventArgs e)
+        {        
+            if (n.Contains("-") == false)
+            {
+                ioScreen.Text = "-" + ioScreen.Text;
+                n = "-" + n;
+            }
         }
 
         private void ans_Click(object sender, EventArgs e)
         {
-           
             ioScreen.Text = ioScreen.Text + "ans";
+            n = prev_res.ToString();
         }
 
         private void equal_Click(object sender, EventArgs e)
@@ -242,21 +266,18 @@ namespace Calculator
                 }
             }
             ioScreen.Text = res.ToString();
+            prev_res = res;
             ops.Clear();
             nums.Clear();
             nums.Add(res);
         }
 
+        //Button Events
         private void btn_dot_Click(object sender, EventArgs e)
         {
             n = n + ".";
             ioScreen.Text = ioScreen.Text + ".";
-        }
-
-        private void neg_Click(object sender, EventArgs e)
-        {
-            ioScreen.Text = "-" + ioScreen.Text;
-        }
+        }       
 
         private void clPar_Click(object sender, EventArgs e)
         {
