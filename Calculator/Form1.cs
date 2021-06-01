@@ -14,11 +14,11 @@ namespace Calculator
         int nth = 0;    //nth key or nth operands
         int nth_mult; //index of a multiplication symbol
         int nth_div; //index of a division symbol
-        int end_io;        
-        int end_n;
-        int last_opIndex;
-        int last_numsIndex;
-        char idx_end_io_ch;
+        int end_io;  //index of last character of ioScreen.Text      
+        int end_n;   //index of last character of n
+        int last_opIndex; //Used in backspace event, last ops index
+        int last_numsIndex; //Used in backspace even, last ops index
+        char idx_end_io_ch; //To convert into string later on
         string multSym = "×";    //Symbol for multiplication
         string divSym = "÷";     //Symbol for Division
         string addSym = "+";     //Symbol for Addition
@@ -184,15 +184,15 @@ namespace Calculator
                 ops.RemoveAt(last_opIndex - 1);
             }
 
-            if (n.Length >= 1)
-            {
-                n = n.Remove(end_n - 1, 1);
-            }
-            else if (n.Length < 1 && idx_end_io != " ")
+            if (last_opIndex < last_numsIndex)
             {
                 nums.RemoveAt(last_numsIndex - 1);
             }
 
+            if (n.Length >= 1)
+            {
+                n = n.Remove(end_n - 1, 1);
+            }
         }
         private void neg_Click(object sender, EventArgs e)
         {        
@@ -211,8 +211,11 @@ namespace Calculator
 
         private void equal_Click(object sender, EventArgs e)
         {
-            nth++;
-            nums.Add(double.Parse(n));
+            if (n != "")
+            {
+                nth++;
+                nums.Add(double.Parse(n));
+            }
             while (ops_contains(multSym) == true || ops_contains(divSym) == true)
             {
                 nth_mult = ops_check(multSym);

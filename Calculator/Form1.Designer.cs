@@ -49,8 +49,6 @@ namespace Calculator
             this.clear = new System.Windows.Forms.Button();
             this.backspace = new System.Windows.Forms.Button();
             this.ans = new System.Windows.Forms.Button();
-            this.clPar = new System.Windows.Forms.Button();
-            this.opPar = new System.Windows.Forms.Button();
             this.ioScreen = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -87,7 +85,7 @@ namespace Calculator
             // equal
             // 
             this.equal.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.equal.Location = new System.Drawing.Point(337, 296);
+            this.equal.Location = new System.Drawing.Point(270, 296);
             this.equal.Name = "equal";
             this.equal.Size = new System.Drawing.Size(124, 58);
             this.equal.TabIndex = 3;
@@ -200,7 +198,7 @@ namespace Calculator
             // minus
             // 
             this.minus.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minus.Location = new System.Drawing.Point(272, 168);
+            this.minus.Location = new System.Drawing.Point(207, 232);
             this.minus.Name = "minus";
             this.minus.Size = new System.Drawing.Size(59, 58);
             this.minus.TabIndex = 14;
@@ -222,7 +220,7 @@ namespace Calculator
             // div
             // 
             this.div.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.div.Location = new System.Drawing.Point(272, 104);
+            this.div.Location = new System.Drawing.Point(207, 296);
             this.div.Name = "div";
             this.div.Size = new System.Drawing.Size(59, 58);
             this.div.TabIndex = 16;
@@ -233,7 +231,7 @@ namespace Calculator
             // clear
             // 
             this.clear.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clear.Location = new System.Drawing.Point(337, 168);
+            this.clear.Location = new System.Drawing.Point(270, 168);
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(124, 58);
             this.clear.TabIndex = 17;
@@ -244,7 +242,7 @@ namespace Calculator
             // backspace
             // 
             this.backspace.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.backspace.Location = new System.Drawing.Point(337, 104);
+            this.backspace.Location = new System.Drawing.Point(270, 104);
             this.backspace.Name = "backspace";
             this.backspace.Size = new System.Drawing.Size(124, 58);
             this.backspace.TabIndex = 18;
@@ -255,7 +253,7 @@ namespace Calculator
             // ans
             // 
             this.ans.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ans.Location = new System.Drawing.Point(337, 232);
+            this.ans.Location = new System.Drawing.Point(270, 232);
             this.ans.Name = "ans";
             this.ans.Size = new System.Drawing.Size(124, 58);
             this.ans.TabIndex = 19;
@@ -263,33 +261,11 @@ namespace Calculator
             this.ans.UseVisualStyleBackColor = true;
             this.ans.Click += new System.EventHandler(this.ans_Click);
             // 
-            // clPar
-            // 
-            this.clPar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clPar.Location = new System.Drawing.Point(207, 232);
-            this.clPar.Name = "clPar";
-            this.clPar.Size = new System.Drawing.Size(124, 58);
-            this.clPar.TabIndex = 21;
-            this.clPar.Text = ")";
-            this.clPar.UseVisualStyleBackColor = true;
-            this.clPar.Click += new System.EventHandler(this.clPar_Click);
-            // 
-            // opPar
-            // 
-            this.opPar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.opPar.Location = new System.Drawing.Point(207, 296);
-            this.opPar.Name = "opPar";
-            this.opPar.Size = new System.Drawing.Size(124, 58);
-            this.opPar.TabIndex = 22;
-            this.opPar.Text = "(";
-            this.opPar.UseVisualStyleBackColor = true;
-            this.opPar.Click += new System.EventHandler(this.opPar_Click);
-            // 
             // ioScreen
             // 
             this.ioScreen.Location = new System.Drawing.Point(12, 12);
             this.ioScreen.Name = "ioScreen";
-            this.ioScreen.Size = new System.Drawing.Size(446, 86);
+            this.ioScreen.Size = new System.Drawing.Size(382, 86);
             this.ioScreen.TabIndex = 23;
             this.ioScreen.Text = "";
             this.ioScreen.TextChanged += new System.EventHandler(this.ioScreen_TextChanged);
@@ -298,10 +274,8 @@ namespace Calculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 360);
+            this.ClientSize = new System.Drawing.Size(403, 360);
             this.Controls.Add(this.ioScreen);
-            this.Controls.Add(this.opPar);
-            this.Controls.Add(this.clPar);
             this.Controls.Add(this.ans);
             this.Controls.Add(this.backspace);
             this.Controls.Add(this.clear);
@@ -351,8 +325,6 @@ namespace Calculator
         private System.Windows.Forms.Button clear;
         private System.Windows.Forms.Button backspace;
         private System.Windows.Forms.Button ans;
-        private System.Windows.Forms.Button clPar;
-        private System.Windows.Forms.Button opPar;
         private System.Windows.Forms.RichTextBox ioScreen;
     }
 }
