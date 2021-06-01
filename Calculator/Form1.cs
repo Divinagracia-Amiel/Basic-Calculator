@@ -79,26 +79,6 @@ namespace Calculator
                     }
                 }
             }
-            else if (op == addSym)
-            {
-                for (int i = 0; i < init_count; i++)
-                {
-                    if (ops[i] == "+")
-                    {
-                        return true;
-                    }
-                }
-            }
-            else if (op == subSym)
-            {
-                for (int i = 0; i < init_count; i++)
-                {
-                    if (ops[i] == "-")
-                    {
-                        return true;
-                    }
-                }             
-            }
             return false;
         }
 
@@ -246,10 +226,11 @@ namespace Calculator
                 ops.RemoveAt(nth);
                 nums.Insert(nth, res);
             }
-            while (ops_contains(addSym) == true)
+            dict_quan = dict_check();
+            first_input = true;
+            for (int i = 0; i < dict_quan-1; i++)
             {
-                nth = ops_check(addSym);
-                for (int i = nth; i <= nth; i++)
+                if (ops[i] == addSym)
                 {
                     if (first_input == true)
                     {
@@ -258,17 +239,10 @@ namespace Calculator
                     }
                     else
                     {
-                        res += nums[i + 1];
+                        res += nums[i+1];
                     }
                 }
-                nums.RemoveRange(nth, 2);
-                ops.RemoveAt(nth);
-                nums.Insert(nth, res);
-            }
-            while (ops_contains(subSym) == true)
-            {
-                nth = ops_check(subSym);
-                for (int i = nth; i <= nth; i++)
+                if (ops[i] == subSym)
                 {
                     if (first_input == true)
                     {
@@ -277,12 +251,9 @@ namespace Calculator
                     }
                     else
                     {
-                        res -= nums[i + 1];
+                        res -= nums[i+1];
                     }
                 }
-                nums.RemoveRange(nth, 2);
-                ops.RemoveAt(nth);
-                nums.Insert(nth, res);
             }
             ioScreen.Text = res.ToString();
             ops.Clear();
