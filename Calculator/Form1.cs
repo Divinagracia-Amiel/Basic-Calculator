@@ -92,6 +92,11 @@ namespace Calculator
             return false;
         }
 
+        private void Add_text(string add_char)
+        {
+            n = n + add_char;
+            ioScreen.Text = ioScreen.Text + add_char;
+        }
 
         private void ioScreen_TextChanged(object sender, EventArgs e)
         {
@@ -281,16 +286,6 @@ namespace Calculator
             n = n + ".";
             ioScreen.Text = ioScreen.Text + ".";
         }       
-
-        private void clPar_Click(object sender, EventArgs e)
-        {
-            ioScreen.Text = ioScreen.Text + ")";
-        }
-
-        private void opPar_Click(object sender, EventArgs e)
-        {
-            ioScreen.Text = ioScreen.Text + "(";
-        }
 
         private void btn0_Click(object sender, EventArgs e)
         {
