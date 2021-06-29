@@ -273,7 +273,7 @@ namespace Calculator
                     nums.Insert(nth, res);
                 }
             }
-            hist_list.Text += "\n" + ioScreen.Text + "\n=" + res.ToString();
+            hist_list.Text = "\n" + ioScreen.Text + "\n= " + res.ToString() + "\n" + hist_list.Text;
             ioScreen.Text = res.ToString();
             prev_res = res;
             ops.Clear();
