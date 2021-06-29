@@ -273,6 +273,7 @@ namespace Calculator
                     nums.Insert(nth, res);
                 }
             }
+            hist_list.Text += "\n" + ioScreen.Text + "\n=" + res.ToString();
             ioScreen.Text = res.ToString();
             prev_res = res;
             ops.Clear();
@@ -338,12 +339,16 @@ namespace Calculator
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+            ioScreen.SelectAll();
+            ioScreen.SelectionAlignment = HorizontalAlignment.Right;
+            hist_list.SelectAll();
+            hist_list.SelectionAlignment = HorizontalAlignment.Right;
         }
 
         private void sqr_function_Click(object sender, EventArgs e)
         {
 
         }
+
     }
 }

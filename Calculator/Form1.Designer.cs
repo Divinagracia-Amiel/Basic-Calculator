@@ -62,7 +62,7 @@ namespace Calculator
             this.m_recall = new System.Windows.Forms.Button();
             this.m_clear = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.hist_list = new System.Windows.Forms.RichTextBox();
             this.hist_mem.SuspendLayout();
             this.hist_page.SuspendLayout();
             this.SuspendLayout();
@@ -338,7 +338,7 @@ namespace Calculator
             // 
             // hist_page
             // 
-            this.hist_page.Controls.Add(this.listBox1);
+            this.hist_page.Controls.Add(this.hist_list);
             this.hist_page.Location = new System.Drawing.Point(4, 22);
             this.hist_page.Name = "hist_page";
             this.hist_page.Padding = new System.Windows.Forms.Padding(3);
@@ -407,13 +407,14 @@ namespace Calculator
             this.button5.Text = "MS";
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // hist_list
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(0, 0);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(215, 446);
-            this.listBox1.TabIndex = 0;
+            this.hist_list.Location = new System.Drawing.Point(0, 0);
+            this.hist_list.Name = "hist_list";
+            this.hist_list.ReadOnly = true;
+            this.hist_list.Size = new System.Drawing.Size(215, 444);
+            this.hist_list.TabIndex = 0;
+            this.hist_list.Text = "";
             // 
             // Form1
             // 
@@ -495,7 +496,7 @@ namespace Calculator
         private System.Windows.Forms.Button m_recall;
         private System.Windows.Forms.Button m_clear;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.RichTextBox hist_list;
     }
 }
 
