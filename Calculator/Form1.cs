@@ -283,71 +283,65 @@ namespace Calculator
         //Button Events
         private void btn_dot_Click(object sender, EventArgs e)
         {
-            n = n + ".";
-            ioScreen.Text = ioScreen.Text + ".";
+            Add_text(".");
         }       
 
         private void btn0_Click(object sender, EventArgs e)
         {
-            n = n + "0";
-            ioScreen.Text = ioScreen.Text + "0";
+            Add_text("0");
         }
 
         private void btn1_Click(object sender, EventArgs e)
         {
-            n = n + "1";
-            ioScreen.Text = ioScreen.Text + "1";
+            Add_text("1");
         }
 
         private void btn2_Click(object sender, EventArgs e)
         {
-            n = n + "2";
-            ioScreen.Text = ioScreen.Text + "2";
+            Add_text("2");
         }
 
         private void btn3_Click(object sender, EventArgs e)
         {
-            n = n + "3";
-            ioScreen.Text = ioScreen.Text + "3";
+            Add_text("3");
         }
 
         private void btn4_Click(object sender, EventArgs e)
         {
-            n = n + "4";
-            ioScreen.Text = ioScreen.Text + "4";
+            Add_text("4");
         }
 
         private void btn5_Click(object sender, EventArgs e)
         {
-            n = n + "5";
-            ioScreen.Text = ioScreen.Text + "5";
+            Add_text("5");
         }
 
         private void btn6_Click(object sender, EventArgs e)
         {
-            n = n + "6";
-            ioScreen.Text = ioScreen.Text + "6";
+            Add_text("6");
         }
 
         private void btn7_Click(object sender, EventArgs e)
         {
-            n = n + "7";
-            ioScreen.Text = ioScreen.Text + "7";
+            Add_text("7");
         }
 
         private void btn8_Click(object sender, EventArgs e)
         {
-            n = n + "8";
-            ioScreen.Text = ioScreen.Text + "8";
+            Add_text("8");
         }
 
         private void btn9_Click(object sender, EventArgs e)
         {
-            n = n + "9";
-            ioScreen.Text = ioScreen.Text + "9";
+            Add_text("9");
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void sqr_function_Click(object sender, EventArgs e)
         {
 
         }
