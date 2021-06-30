@@ -21,7 +21,6 @@ namespace Calculator
         string subSym = "-";     //Symbol for subtraction
         string idx_end_io;
         string n = "";  //used to make variables seperate       
-        List<string> texts = new List<string>();
         public Form1()
         {
             InitializeComponent();
@@ -30,13 +29,17 @@ namespace Calculator
         //Methods           
         private void Add_text(string add_char)
         {
+            if (n == "" || n == "0")
+            {
+                ioScreen.Text = String.Empty;
+            }
             n = n + add_char;
             ioScreen.Text = ioScreen.Text + add_char;
         }
 
-        private void addOutputscreen()
+        private void addOutputscreen(string add_char)
         {
-
+            output_screen.Text = output_screen.Text + add_char;
         }
 
         private void ioScreen_TextChanged(object sender, EventArgs e)
@@ -52,7 +55,7 @@ namespace Calculator
                 nth++;
                 PEMDAS.add_num(double.Parse(n));
                 PEMDAS.add_ops("+");
-                ioScreen.Text = ioScreen.Text + " + ";                  
+                addOutputscreen(n + " + ");           
                 n = "";                  
             }               
         }
@@ -92,8 +95,52 @@ namespace Calculator
                 n = "";
             }
         }
-       
+
         //Other Events
+        private void sqr_function_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void reciprocal_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void percent_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sqrt_function_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void m_clear_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void m_recall_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void m_add_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void m_sub_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void m_store_Click(object sender, EventArgs e)
+        {
+
+        }
         private void clear_Click(object sender, EventArgs e)
         {
             ioScreen.Text = String.Empty;
@@ -158,6 +205,7 @@ namespace Calculator
         {
             res = PEMDAS.equal_function(n);
             hist_list.Text = "\n" + ioScreen.Text + "\n= " + res.ToString() + "\n" + hist_list.Text;
+            addOutputscreen(n + " = ");
             ioScreen.Text = res.ToString();
             prev_res = res;
             PEMDAS.ops.Clear();
@@ -166,12 +214,12 @@ namespace Calculator
 
         //Button Events
         private void btn_dot_Click(object sender, EventArgs e)
-        {
+        {          
             Add_text(".");
         }       
 
         private void btn0_Click(object sender, EventArgs e)
-        {
+        {          
             Add_text("0");
         }
 
@@ -229,11 +277,6 @@ namespace Calculator
             hist_list.SelectAll();
             hist_list.SelectionAlignment = HorizontalAlignment.Right;
         }
-
-        private void sqr_function_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
     }
 }

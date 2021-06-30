@@ -59,10 +59,10 @@ namespace Calculator
             this.hist_list = new System.Windows.Forms.RichTextBox();
             this.mem_page = new System.Windows.Forms.TabPage();
             this.m_add = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.m_sub = new System.Windows.Forms.Button();
             this.m_recall = new System.Windows.Forms.Button();
             this.m_clear = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.m_store = new System.Windows.Forms.Button();
             this.output_screen = new System.Windows.Forms.RichTextBox();
             this.hist_mem.SuspendLayout();
             this.hist_page.SuspendLayout();
@@ -296,6 +296,7 @@ namespace Calculator
             this.reciprocal.TabIndex = 24;
             this.reciprocal.Text = "1/x";
             this.reciprocal.UseVisualStyleBackColor = true;
+            this.reciprocal.Click += new System.EventHandler(this.reciprocal_Click);
             // 
             // sqr_function
             // 
@@ -317,6 +318,7 @@ namespace Calculator
             this.sqrt_function.TabIndex = 26;
             this.sqrt_function.Text = "√x";
             this.sqrt_function.UseVisualStyleBackColor = true;
+            this.sqrt_function.Click += new System.EventHandler(this.sqrt_function_Click);
             // 
             // percent
             // 
@@ -327,6 +329,7 @@ namespace Calculator
             this.percent.TabIndex = 27;
             this.percent.Text = "%";
             this.percent.UseVisualStyleBackColor = true;
+            this.percent.Click += new System.EventHandler(this.percent_Click);
             // 
             // hist_mem
             // 
@@ -377,16 +380,18 @@ namespace Calculator
             this.m_add.TabIndex = 33;
             this.m_add.Text = "M+";
             this.m_add.UseVisualStyleBackColor = true;
+            this.m_add.Click += new System.EventHandler(this.m_add_Click);
             // 
-            // button2
+            // m_sub
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(202, 104);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(59, 58);
-            this.button2.TabIndex = 32;
-            this.button2.Text = "M-";
-            this.button2.UseVisualStyleBackColor = true;
+            this.m_sub.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_sub.Location = new System.Drawing.Point(202, 104);
+            this.m_sub.Name = "m_sub";
+            this.m_sub.Size = new System.Drawing.Size(59, 58);
+            this.m_sub.TabIndex = 32;
+            this.m_sub.Text = "M-";
+            this.m_sub.UseVisualStyleBackColor = true;
+            this.m_sub.Click += new System.EventHandler(this.m_sub_Click);
             // 
             // m_recall
             // 
@@ -397,6 +402,7 @@ namespace Calculator
             this.m_recall.TabIndex = 31;
             this.m_recall.Text = "MR";
             this.m_recall.UseVisualStyleBackColor = true;
+            this.m_recall.Click += new System.EventHandler(this.m_recall_Click);
             // 
             // m_clear
             // 
@@ -407,16 +413,18 @@ namespace Calculator
             this.m_clear.TabIndex = 30;
             this.m_clear.Text = "MC";
             this.m_clear.UseVisualStyleBackColor = true;
+            this.m_clear.Click += new System.EventHandler(this.m_clear_Click);
             // 
-            // button5
+            // m_store
             // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(267, 104);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(59, 58);
-            this.button5.TabIndex = 29;
-            this.button5.Text = "MS";
-            this.button5.UseVisualStyleBackColor = true;
+            this.m_store.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_store.Location = new System.Drawing.Point(267, 104);
+            this.m_store.Name = "m_store";
+            this.m_store.Size = new System.Drawing.Size(59, 58);
+            this.m_store.TabIndex = 29;
+            this.m_store.Text = "MS";
+            this.m_store.UseVisualStyleBackColor = true;
+            this.m_store.Click += new System.EventHandler(this.m_store_Click);
             // 
             // output_screen
             // 
@@ -433,10 +441,10 @@ namespace Calculator
             this.ClientSize = new System.Drawing.Size(568, 491);
             this.Controls.Add(this.output_screen);
             this.Controls.Add(this.m_add);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.m_sub);
             this.Controls.Add(this.m_recall);
             this.Controls.Add(this.m_clear);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.m_store);
             this.Controls.Add(this.hist_mem);
             this.Controls.Add(this.percent);
             this.Controls.Add(this.sqrt_function);
@@ -503,10 +511,10 @@ namespace Calculator
         private System.Windows.Forms.TabPage hist_page;
         private System.Windows.Forms.TabPage mem_page;
         private System.Windows.Forms.Button m_add;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button m_sub;
         private System.Windows.Forms.Button m_recall;
         private System.Windows.Forms.Button m_clear;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button m_store;
         private System.Windows.Forms.RichTextBox hist_list;
         private System.Windows.Forms.RichTextBox output_screen;
     }
