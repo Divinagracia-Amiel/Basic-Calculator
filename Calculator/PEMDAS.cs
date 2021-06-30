@@ -35,16 +35,30 @@ namespace Calculator
             return dict_quan;
         }
 
-        private static void ops_logic(int nth, string ops)
+        private static void pemdas_logic(int nth, string operation)
         {
-            if (ops == multSym)
+            res = 0;
+            if (operation == multSym)
             {
-
+                nth = ops_check(multSym);
+                res = nums[nth] * nums[nth + 1];
             }
-            else if (ops == divSym)
+            else if (operation == divSym)
             {
-
+                nth = ops_check(divSym);
+                res = nums[nth] / nums[nth + 1];
             }
+            else if (operation == addSym)
+            {
+                res = nums[0] + nums[0 + 1];
+            }
+            else if (operation == subSym)
+            {
+                res = nums[0] - nums[0 + 1];
+            }
+            nums.RemoveRange(nth, 2);
+            ops.RemoveAt(nth);
+            nums.Insert(nth, res);
         }
 
         public static int ops_check(string op) //Checks what index in the operation dictionary, is a multiplication or division
@@ -121,21 +135,11 @@ namespace Calculator
 
                 if (nth_mult < nth_div)
                 {
-                    nth_mult = ops_check(multSym);
-                    res = 0;
-                    res = nums[nth_mult] * nums[nth_mult + 1];
-                    nums.RemoveRange(nth_mult, 2);
-                    ops.RemoveAt(nth_mult);
-                    nums.Insert(nth_mult, res);
+                    pemdas_logic(nth_mult, multSym);
                 }
                 else if (nth_div < nth_mult)
                 {
-                    nth_div = ops_check(divSym);
-                    res = 0;
-                    res = nums[nth_div] / nums[nth_div + 1];
-                    nums.RemoveRange(nth_div, 2);
-                    ops.RemoveAt(nth_div);
-                    nums.Insert(nth_div, res);
+                    pemdas_logic(nth_div, divSym);
                 }
             }
             dict_quan = dict_check();
@@ -144,19 +148,11 @@ namespace Calculator
             {
                 if (ops[0] == addSym)
                 {
-                    res = 0;
-                    res = nums[0] + nums[0 + 1];
-                    nums.RemoveRange(nth, 2);
-                    ops.RemoveAt(nth);
-                    nums.Insert(nth, res);
+                    pemdas_logic(nth, addSym);
                 }
                 else if (ops[0] == subSym)
                 {
-                    res = 0;
-                    res = nums[0] - nums[0 + 1];
-                    nums.RemoveRange(nth, 2);
-                    ops.RemoveAt(nth);
-                    nums.Insert(nth, res);
+                    pemdas_logic(nth, subSym);
                 }
             }
             return res;
