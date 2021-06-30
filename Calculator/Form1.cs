@@ -67,7 +67,7 @@ namespace Calculator
                 nth++;
                 PEMDAS.add_num(double.Parse(n));
                 PEMDAS.add_ops("-");
-                ioScreen.Text = ioScreen.Text + " - ";
+                addOutputscreen(n + " - ");
                 n = "";
             }
         }
@@ -79,7 +79,7 @@ namespace Calculator
                 nth++;
                 PEMDAS.add_num(double.Parse(n));
                 PEMDAS.add_ops(divSym);
-                ioScreen.Text = ioScreen.Text + " ÷ ";
+                addOutputscreen(n + " " + divSym + " ");
                 n = "";
             }            
         }
@@ -91,7 +91,7 @@ namespace Calculator
                 nth++;
                 PEMDAS.add_num(double.Parse(n));
                 PEMDAS.add_ops(multSym);
-                ioScreen.Text = ioScreen.Text + " × ";
+                addOutputscreen(n + " " + multSym + " ");
                 n = "";
             }
         }
@@ -157,7 +157,7 @@ namespace Calculator
             last_opIndex = PEMDAS.ops.Count();
             last_numsIndex = PEMDAS.nums.Count();
 
-            if (ioScreen.Text == "")
+            if (ioScreen.Text == "" || ioScreen.Text == "0")
             {
                 n = PEMDAS.nums[last_numsIndex - 1].ToString();
                 output_screen.Text = output_screen.Text.Remove(output_screen.TextLength - n.Length - 4, n.Length + 3);
@@ -200,8 +200,8 @@ namespace Calculator
         private void equal_Click(object sender, EventArgs e)
         {
             res = PEMDAS.equal_function(n);
-            hist_list.Text = "\n" + ioScreen.Text + "\n= " + res.ToString() + "\n" + hist_list.Text;
             addOutputscreen(n + " = ");
+            hist_list.Text = "\n" + output_screen.Text.Substring(0, output_screen.TextLength - 3) + "\n= " + res.ToString() + "\n" + hist_list.Text;           
             ioScreen.Text = res.ToString();
             prev_res = res;
             PEMDAS.ops.Clear();
@@ -272,6 +272,7 @@ namespace Calculator
             output_screen.SelectionAlignment = HorizontalAlignment.Right;
             hist_list.SelectAll();
             hist_list.SelectionAlignment = HorizontalAlignment.Right;
+            ioScreen.Text = "0";
         }
         
     }
