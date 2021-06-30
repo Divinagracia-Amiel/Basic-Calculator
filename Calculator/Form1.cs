@@ -10,16 +10,12 @@ namespace Calculator
         double res;     //result
         double prev_res; //to store the previous result
         int nth = 0;    //nth key or nth operands
-        int end_io;  //index of last character of ioScreen.Text      
-        int end_n;   //index of last character of n
         int last_opIndex; //Used in backspace event, last ops index
         int last_numsIndex; //Used in backspace even, last ops index
-        char idx_end_io_ch; //To convert into string later on
         string multSym = "×";    //Symbol for multiplication
         string divSym = "÷";     //Symbol for Division
         string addSym = "+";     //Symbol for Addition
         string subSym = "-";     //Symbol for subtraction
-        string idx_end_io;
         string n = "";  //used to make variables seperate
         public Form1()
         {
@@ -143,44 +139,47 @@ namespace Calculator
         }
         private void clear_Click(object sender, EventArgs e)
         {
+            ioScreen.Text = String.Empty;;          
+            n = "";
+        }
+        private void clearE_Click(object sender, EventArgs e)
+        {
             ioScreen.Text = String.Empty;
-            res = 0;
+            output_screen.Text = String.Empty;
             PEMDAS.ops.Clear();
             PEMDAS.nums.Clear();
-            n = "0";
+            n = "";
         }
 
         private void backspace_Click(object sender, EventArgs e)
         {
-            end_io = ioScreen.Text.Length;
-            end_n = n.Length;
             last_opIndex = PEMDAS.ops.Count();
             last_numsIndex = PEMDAS.nums.Count();
+            if (ioScreen.Text.Length >= 1)
+            {
+                ioScreen.Text = ioScreen.Text.Remove(ioScreen.TextLength - 1, 1);
+                if (n.Length >= 1)
+                {
+                    n = n.Remove(n.Length - 1, 1);
+                }
+            }
 
             if (ioScreen.Text == "" || ioScreen.Text == "0")
             {
-                n = PEMDAS.nums[last_numsIndex - 1].ToString();
-                output_screen.Text = output_screen.Text.Remove(output_screen.TextLength - n.Length - 4, n.Length + 3);
-                ioScreen.Text += n;
-                output_screen.Text = "";
-                PEMDAS.ops.RemoveAt(last_opIndex - 1);
+                if (output_screen.TextLength - n.Length - 3 > 0 && PEMDAS.nums.Count > 0)
+                {
+                    n = PEMDAS.nums[last_numsIndex - 1].ToString();
+                    ioScreen.Text += n;
+                    output_screen.Text = output_screen.Text.Remove(output_screen.TextLength - n.Length - 3, n.Length + 3);
+                    PEMDAS.ops.RemoveAt(last_opIndex - 1);
+                }              
             }
-            if (ioScreen.Text.Length >= 1)
-            {               
-                idx_end_io_ch = ioScreen.Text[end_io - 1];
-                idx_end_io = idx_end_io_ch.ToString();
-                ioScreen.Text = ioScreen.Text.Remove(end_io - 1, 1);                            
-            }           
+
 
             if (last_opIndex < last_numsIndex)
             {
                 PEMDAS.nums.RemoveAt(last_numsIndex - 1);
-            }
-
-            if (n.Length >= 1)
-            {
-                n = n.Remove(end_n - 1, 1);
-            }
+            }          
         }
         private void neg_Click(object sender, EventArgs e)
         {        
@@ -199,13 +198,21 @@ namespace Calculator
 
         private void equal_Click(object sender, EventArgs e)
         {
-            res = PEMDAS.equal_function(n);
-            addOutputscreen(n + " = ");
-            hist_list.Text = "\n" + output_screen.Text.Substring(0, output_screen.TextLength - 3) + "\n= " + res.ToString() + "\n" + hist_list.Text;           
-            ioScreen.Text = res.ToString();
-            prev_res = res;
-            PEMDAS.ops.Clear();
-            PEMDAS.nums.Clear();
+            if (output_screen.Text != String.Empty)
+            {
+                res = PEMDAS.equal_function(n);
+                addOutputscreen(n + " = ");
+                hist_list.Text = "\n" + output_screen.Text.Substring(0, output_screen.TextLength - 3) + "\n= " + res.ToString() + "\n" + hist_list.Text;
+                ioScreen.Text = res.ToString();
+                prev_res = res;
+                PEMDAS.ops.Clear();
+                PEMDAS.nums.Clear();
+            }
+            else
+            {
+                res = double.Parse(ioScreen.Text);
+                hist_list.Text = "\n" + "\n= " + res + hist_list.Text;
+            }       
         }
 
         //Button Events
@@ -274,6 +281,6 @@ namespace Calculator
             hist_list.SelectionAlignment = HorizontalAlignment.Right;
             ioScreen.Text = "0";
         }
-        
+       
     }
 }

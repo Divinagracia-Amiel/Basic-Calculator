@@ -64,6 +64,7 @@ namespace Calculator
             this.m_clear = new System.Windows.Forms.Button();
             this.m_store = new System.Windows.Forms.Button();
             this.output_screen = new System.Windows.Forms.RichTextBox();
+            this.clearE = new System.Windows.Forms.Button();
             this.hist_mem.SuspendLayout();
             this.hist_page.SuspendLayout();
             this.SuspendLayout();
@@ -101,9 +102,9 @@ namespace Calculator
             // equal
             // 
             this.equal.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.equal.Location = new System.Drawing.Point(267, 360);
+            this.equal.Location = new System.Drawing.Point(267, 424);
             this.equal.Name = "equal";
-            this.equal.Size = new System.Drawing.Size(59, 122);
+            this.equal.Size = new System.Drawing.Size(59, 58);
             this.equal.TabIndex = 3;
             this.equal.Text = "=";
             this.equal.UseVisualStyleBackColor = true;
@@ -247,7 +248,7 @@ namespace Calculator
             // clear
             // 
             this.clear.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clear.Location = new System.Drawing.Point(267, 234);
+            this.clear.Location = new System.Drawing.Point(267, 232);
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(59, 58);
             this.clear.TabIndex = 17;
@@ -269,7 +270,7 @@ namespace Calculator
             // ans
             // 
             this.ans.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ans.Location = new System.Drawing.Point(267, 296);
+            this.ans.Location = new System.Drawing.Point(268, 360);
             this.ans.Name = "ans";
             this.ans.Size = new System.Drawing.Size(59, 58);
             this.ans.TabIndex = 19;
@@ -434,11 +435,23 @@ namespace Calculator
             this.output_screen.TabIndex = 34;
             this.output_screen.Text = "";
             // 
+            // clearE
+            // 
+            this.clearE.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearE.Location = new System.Drawing.Point(267, 296);
+            this.clearE.Name = "clearE";
+            this.clearE.Size = new System.Drawing.Size(59, 58);
+            this.clearE.TabIndex = 35;
+            this.clearE.Text = "CE";
+            this.clearE.UseVisualStyleBackColor = true;
+            this.clearE.Click += new System.EventHandler(this.clearE_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(568, 491);
+            this.Controls.Add(this.clearE);
             this.Controls.Add(this.output_screen);
             this.Controls.Add(this.m_add);
             this.Controls.Add(this.m_sub);
@@ -517,6 +530,7 @@ namespace Calculator
         private System.Windows.Forms.Button m_store;
         private System.Windows.Forms.RichTextBox hist_list;
         private System.Windows.Forms.RichTextBox output_screen;
+        private System.Windows.Forms.Button clearE;
     }
 }
 
