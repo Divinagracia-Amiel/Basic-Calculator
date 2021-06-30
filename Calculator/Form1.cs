@@ -24,73 +24,15 @@ namespace Calculator
         string addSym = "+";     //Symbol for Addition
         string subSym = "-";     //Symbol for subtraction
         string idx_end_io;
-        string n = "";  //used to make variables seperate
-        List<double> nums = new List<double>(); //list for nth operand and its value
-        List<string> ops = new List<string>(); //list for nth operators
+        string n = "";  //used to make variables seperate       
         List<string> texts = new List<string>();
         public Form1()
         {
             InitializeComponent();
         }
 
-        //Methods
-        private int dict_check() //dictionary count
-        {
-            dict_quan = nums.Count();
-            return dict_quan;
-        }
-
-        private int ops_check(string op) //Checks what index in the operation dictionary, is a multiplication or division
-        {
-            init_count = dict_check() - 1;
-            if (op == multSym)
-            {               
-                for (int i = 0; i < init_count; i++)
-                {
-                    if (ops[i] == multSym)
-                    {
-                        return i;
-                    }
-                }
-            }
-            else if (op == divSym)
-            {
-                for (int i = 0 ; i < init_count; i++)
-                {
-                    if (ops[i] == divSym)
-                    {
-                        return i;
-                    }
-                }
-            }
-            return 1;
-        }
-
-        private bool ops_contains(string op) //Checks whether the operation is in the equation
-        {
-            init_count = dict_check() - 1;
-            if (op == multSym)
-            {
-                for (int i = 0; i < init_count; i++)
-                {
-                    if (ops[i] == multSym)
-                    {
-                        return true;
-                    }
-                }             
-            }
-            else if (op == divSym)
-            {
-                for (int i = 0; i < init_count; i++)
-                {
-                    if (ops[i] == divSym)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
+        //Methods       
+       
 
         private void Add_text(string add_char)
         {
@@ -110,8 +52,8 @@ namespace Calculator
             if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
             {    
                 nth++;
-                nums.Add(double.Parse(n));
-                ops.Add("+");
+                PEMDAS.add_num(double.Parse(n));
+                PEMDAS.add_ops("+");
                 ioScreen.Text = ioScreen.Text + " + ";                  
                 n = "";                  
             }               
@@ -122,8 +64,8 @@ namespace Calculator
             if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
             {
                 nth++;
-                nums.Add(double.Parse(n));
-                ops.Add("-");
+                PEMDAS.add_num(double.Parse(n));
+                PEMDAS.add_ops("-");
                 ioScreen.Text = ioScreen.Text + " - ";
                 n = "";
             }
@@ -134,8 +76,8 @@ namespace Calculator
             if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
             {
                 nth++;
-                nums.Add(double.Parse(n));
-                ops.Add(divSym);
+                PEMDAS.add_num(double.Parse(n));
+                PEMDAS.add_ops(divSym);
                 ioScreen.Text = ioScreen.Text + " ÷ ";
                 n = "";
             }            
@@ -146,8 +88,8 @@ namespace Calculator
             if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
             {
                 nth++;
-                nums.Add(double.Parse(n));
-                ops.Add(multSym);
+                PEMDAS.add_num(double.Parse(n));
+                PEMDAS.add_ops(multSym);
                 ioScreen.Text = ioScreen.Text + " × ";
                 n = "";
             }
@@ -158,8 +100,8 @@ namespace Calculator
         {
             ioScreen.Text = String.Empty;
             res = 0;
-            ops.Clear();
-            nums.Clear();
+            PEMDAS.ops.Clear();
+            PEMDAS.nums.Clear();
             n = "0";
         }
 
@@ -167,15 +109,15 @@ namespace Calculator
         {
             end_io = ioScreen.Text.Length;
             end_n = n.Length;
-            last_opIndex = ops.Count();
-            last_numsIndex = nums.Count;
+            last_opIndex = PEMDAS.ops.Count();
+            last_numsIndex = PEMDAS.nums.Count();
 
             if (ioScreen.Text == "")
             {
                 n = "0";
                 res = 0;
-                ops.Clear();
-                nums.Clear();
+                PEMDAS.ops.Clear();
+                PEMDAS.nums.Clear();
             }
             if (ioScreen.Text.Length >= 1)
             {               
@@ -186,12 +128,12 @@ namespace Calculator
             
             if (idx_end_io == multSym || idx_end_io == divSym || idx_end_io == addSym || idx_end_io == subSym)
             {             
-                ops.RemoveAt(last_opIndex - 1);
+                PEMDAS.ops.RemoveAt(last_opIndex - 1);
             }
 
             if (last_opIndex < last_numsIndex)
             {
-                nums.RemoveAt(last_numsIndex - 1);
+                PEMDAS.nums.RemoveAt(last_numsIndex - 1);
             }
 
             if (n.Length >= 1)
@@ -216,69 +158,12 @@ namespace Calculator
 
         private void equal_Click(object sender, EventArgs e)
         {
-            if (n != "")
-            {
-                nth++;
-                nums.Add(double.Parse(n));
-            }
-            while (ops_contains(multSym) == true || ops_contains(divSym) == true)
-            {
-                nth_mult = ops_check(multSym);
-                nth_div = ops_check(divSym);
-                if (ops_contains(multSym) == false)
-                {
-                    nth_div = nth_mult - 1;
-                }
-                else if (ops_contains(divSym) == false)
-                {
-                    nth_mult = nth_div - 1;
-                }
-                if (nth_mult < nth_div)
-                {
-                    nth_mult = ops_check(multSym);
-                    res = 0;
-                    res = nums[nth_mult] * nums[nth_mult + 1];
-                    nums.RemoveRange(nth_mult, 2);
-                    ops.RemoveAt(nth_mult);
-                    nums.Insert(nth_mult, res);                 
-                }                
-                else if (nth_div < nth_mult)
-                {
-                    nth_div = ops_check(divSym);
-                    res = 0;
-                    res = nums[nth_div] / nums[nth_div + 1];
-                    nums.RemoveRange(nth_div, 2);
-                    ops.RemoveAt(nth_div);
-                    nums.Insert(nth_div, res);
-                }
-            }
-            dict_quan = dict_check();
-            nth = 0;
-            for (int i = 0; i < dict_quan-1; i++)
-            {
-                if (ops[0] == addSym)
-                {
-                    res = 0;
-                    res = nums[0] + nums[0 + 1];
-                    nums.RemoveRange(nth, 2);
-                    ops.RemoveAt(nth);
-                    nums.Insert(nth, res);             
-                }
-                else if (ops[0] == subSym)
-                {
-                    res = 0;
-                    res = nums[0] - nums[0 + 1];
-                    nums.RemoveRange(nth, 2);
-                    ops.RemoveAt(nth);
-                    nums.Insert(nth, res);
-                }
-            }
+            res = PEMDAS.equal_function(n);
             hist_list.Text = "\n" + ioScreen.Text + "\n= " + res.ToString() + "\n" + hist_list.Text;
             ioScreen.Text = res.ToString();
             prev_res = res;
-            ops.Clear();
-            nums.Clear();
-            nums.Add(res);
+            PEMDAS.ops.Clear();
+            PEMDAS.nums.Clear();
         }
 
         //Button Events
