@@ -56,13 +56,14 @@ namespace Calculator
             this.percent = new System.Windows.Forms.Button();
             this.hist_mem = new System.Windows.Forms.TabControl();
             this.hist_page = new System.Windows.Forms.TabPage();
+            this.hist_list = new System.Windows.Forms.RichTextBox();
             this.mem_page = new System.Windows.Forms.TabPage();
             this.m_add = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.m_recall = new System.Windows.Forms.Button();
             this.m_clear = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.hist_list = new System.Windows.Forms.RichTextBox();
+            this.output_screen = new System.Windows.Forms.RichTextBox();
             this.hist_mem.SuspendLayout();
             this.hist_page.SuspendLayout();
             this.SuspendLayout();
@@ -278,9 +279,10 @@ namespace Calculator
             // 
             // ioScreen
             // 
-            this.ioScreen.Location = new System.Drawing.Point(8, 12);
+            this.ioScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ioScreen.Location = new System.Drawing.Point(8, 66);
             this.ioScreen.Name = "ioScreen";
-            this.ioScreen.Size = new System.Drawing.Size(319, 86);
+            this.ioScreen.Size = new System.Drawing.Size(319, 32);
             this.ioScreen.TabIndex = 23;
             this.ioScreen.Text = "";
             this.ioScreen.TextChanged += new System.EventHandler(this.ioScreen_TextChanged);
@@ -347,6 +349,15 @@ namespace Calculator
             this.hist_page.Text = "History";
             this.hist_page.UseVisualStyleBackColor = true;
             // 
+            // hist_list
+            // 
+            this.hist_list.Location = new System.Drawing.Point(0, 0);
+            this.hist_list.Name = "hist_list";
+            this.hist_list.ReadOnly = true;
+            this.hist_list.Size = new System.Drawing.Size(215, 444);
+            this.hist_list.TabIndex = 0;
+            this.hist_list.Text = "";
+            // 
             // mem_page
             // 
             this.mem_page.Location = new System.Drawing.Point(4, 22);
@@ -407,20 +418,20 @@ namespace Calculator
             this.button5.Text = "MS";
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // hist_list
+            // output_screen
             // 
-            this.hist_list.Location = new System.Drawing.Point(0, 0);
-            this.hist_list.Name = "hist_list";
-            this.hist_list.ReadOnly = true;
-            this.hist_list.Size = new System.Drawing.Size(215, 444);
-            this.hist_list.TabIndex = 0;
-            this.hist_list.Text = "";
+            this.output_screen.Location = new System.Drawing.Point(8, 12);
+            this.output_screen.Name = "output_screen";
+            this.output_screen.Size = new System.Drawing.Size(318, 48);
+            this.output_screen.TabIndex = 34;
+            this.output_screen.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(568, 491);
+            this.Controls.Add(this.output_screen);
             this.Controls.Add(this.m_add);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.m_recall);
@@ -497,6 +508,7 @@ namespace Calculator
         private System.Windows.Forms.Button m_clear;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.RichTextBox hist_list;
+        private System.Windows.Forms.RichTextBox output_screen;
     }
 }
 

@@ -34,6 +34,19 @@ namespace Calculator
             dict_quan = nums.Count();
             return dict_quan;
         }
+
+        private static void ops_logic(int nth, string ops)
+        {
+            if (ops == multSym)
+            {
+
+            }
+            else if (ops == divSym)
+            {
+
+            }
+        }
+
         public static int ops_check(string op) //Checks what index in the operation dictionary, is a multiplication or division
         {
             init_count = dict_check() - 1;
@@ -105,6 +118,7 @@ namespace Calculator
                 {
                     nth_mult = nth_div - 1;
                 }
+
                 if (nth_mult < nth_div)
                 {
                     nth_mult = ops_check(multSym);

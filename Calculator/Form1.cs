@@ -9,11 +9,7 @@ namespace Calculator
     {                
         double res;     //result
         double prev_res; //to store the previous result
-        int init_count; //for checking what order an operator is
-        int dict_quan;  //Quantity of keys in dictionary
         int nth = 0;    //nth key or nth operands
-        int nth_mult; //index of a multiplication symbol
-        int nth_div; //index of a division symbol
         int end_io;  //index of last character of ioScreen.Text      
         int end_n;   //index of last character of n
         int last_opIndex; //Used in backspace event, last ops index
@@ -31,13 +27,16 @@ namespace Calculator
             InitializeComponent();
         }
 
-        //Methods       
-       
-
+        //Methods           
         private void Add_text(string add_char)
         {
             n = n + add_char;
             ioScreen.Text = ioScreen.Text + add_char;
+        }
+
+        private void addOutputscreen()
+        {
+
         }
 
         private void ioScreen_TextChanged(object sender, EventArgs e)
@@ -48,7 +47,6 @@ namespace Calculator
         //Operation Events
         private void plus_Click(object sender, EventArgs e)
         {
-
             if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
             {    
                 nth++;
@@ -226,6 +224,8 @@ namespace Calculator
         {
             ioScreen.SelectAll();
             ioScreen.SelectionAlignment = HorizontalAlignment.Right;
+            output_screen.SelectAll();
+            output_screen.SelectionAlignment = HorizontalAlignment.Right;
             hist_list.SelectAll();
             hist_list.SelectionAlignment = HorizontalAlignment.Right;
         }
