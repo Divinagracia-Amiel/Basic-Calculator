@@ -203,7 +203,7 @@ namespace Calculator
             // plus
             // 
             this.plus.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.plus.Location = new System.Drawing.Point(202, 296);
+            this.plus.Location = new System.Drawing.Point(202, 360);
             this.plus.Name = "plus";
             this.plus.Size = new System.Drawing.Size(59, 58);
             this.plus.TabIndex = 13;
@@ -214,7 +214,7 @@ namespace Calculator
             // minus
             // 
             this.minus.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minus.Location = new System.Drawing.Point(202, 360);
+            this.minus.Location = new System.Drawing.Point(202, 424);
             this.minus.Name = "minus";
             this.minus.Size = new System.Drawing.Size(59, 58);
             this.minus.TabIndex = 14;
@@ -236,7 +236,7 @@ namespace Calculator
             // div
             // 
             this.div.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.div.Location = new System.Drawing.Point(202, 424);
+            this.div.Location = new System.Drawing.Point(202, 296);
             this.div.Name = "div";
             this.div.Size = new System.Drawing.Size(59, 58);
             this.div.TabIndex = 16;

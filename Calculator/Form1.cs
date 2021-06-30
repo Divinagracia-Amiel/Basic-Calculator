@@ -20,7 +20,7 @@ namespace Calculator
         string addSym = "+";     //Symbol for Addition
         string subSym = "-";     //Symbol for subtraction
         string idx_end_io;
-        string n = "";  //used to make variables seperate       
+        string n = "";  //used to make variables seperate
         public Form1()
         {
             InitializeComponent();
@@ -159,22 +159,18 @@ namespace Calculator
 
             if (ioScreen.Text == "")
             {
-                n = "0";
-                res = 0;
-                PEMDAS.ops.Clear();
-                PEMDAS.nums.Clear();
+                n = PEMDAS.nums[last_numsIndex - 1].ToString();
+                output_screen.Text = output_screen.Text.Remove(output_screen.TextLength - n.Length - 4, n.Length + 3);
+                ioScreen.Text += n;
+                output_screen.Text = "";
+                PEMDAS.ops.RemoveAt(last_opIndex - 1);
             }
             if (ioScreen.Text.Length >= 1)
             {               
                 idx_end_io_ch = ioScreen.Text[end_io - 1];
                 idx_end_io = idx_end_io_ch.ToString();
                 ioScreen.Text = ioScreen.Text.Remove(end_io - 1, 1);                            
-            }
-            
-            if (idx_end_io == multSym || idx_end_io == divSym || idx_end_io == addSym || idx_end_io == subSym)
-            {             
-                PEMDAS.ops.RemoveAt(last_opIndex - 1);
-            }
+            }           
 
             if (last_opIndex < last_numsIndex)
             {
