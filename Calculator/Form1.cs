@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace Calculator
 {
     public partial class Form1 : Form
-    {                
+    {   
         double res;     //result
         double prev_res; //to store the previous result
         int nth = 0;    //nth key or nth operands
@@ -78,22 +78,34 @@ namespace Calculator
         //Other Events
         private void sqr_function_Click(object sender, EventArgs e)
         {
-
+            n = PEMDAS.other_ops(n, "sqr");
+            ioScreen.Text = String.Empty;
+            ioScreen.Text += n;
         }
 
         private void reciprocal_Click(object sender, EventArgs e)
         {
-
+            n = PEMDAS.other_ops(n, "reciprocal");
+            ioScreen.Text = String.Empty;
+            ioScreen.Text += n;
         }
 
         private void percent_Click(object sender, EventArgs e)
         {
-
+            if (PEMDAS.nums.Count != 0)
+            {
+                n = PEMDAS.other_ops(n, "percent");
+                ioScreen.Text = String.Empty;
+                ioScreen.Text += n;
+                equal.PerformClick();
+            }               
         }
 
         private void sqrt_function_Click(object sender, EventArgs e)
         {
-
+            n = PEMDAS.other_ops(n, "sqrt");
+            ioScreen.Text = String.Empty;
+            ioScreen.Text += n;
         }
 
         private void m_clear_Click(object sender, EventArgs e)
@@ -208,11 +220,15 @@ namespace Calculator
                 prev_res = res;
                 PEMDAS.ops.Clear();
                 PEMDAS.nums.Clear();
+                output_screen.Text = String.Empty;
+                n = "";
+                op_actv = true; 
             }
             else
             {
                 res = double.Parse(ioScreen.Text);
                 hist_list.Text = "\n" + "\n= " + res + hist_list.Text;
+                n = "";
             }       
         }
 
@@ -223,8 +239,11 @@ namespace Calculator
         }       
 
         private void btn0_Click(object sender, EventArgs e)
-        {          
-            Add_text("0");
+        {
+            if (ioScreen.Text != "0")
+            {
+                Add_text("0");
+            }           
         }
 
         private void btn1_Click(object sender, EventArgs e)

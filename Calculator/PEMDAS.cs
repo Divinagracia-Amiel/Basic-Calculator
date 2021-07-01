@@ -18,6 +18,7 @@ namespace Calculator
         static string divSym = "÷";     //Symbol for Division
         static string addSym = "+";     //Symbol for Addition
         static string subSym = "-";     //Symbol for subtraction
+        private static double n_double;
         public static List<double> nums = new List<double>(); //list for nth operand and its value
         public static List<string> ops = new List<string>(); //list for nth operators
         public static void add_num(double num)
@@ -35,7 +36,34 @@ namespace Calculator
             dict_quan = nums.Count();
             return dict_quan;
         }
-              
+
+        public static string other_ops(string n, string op)
+        {
+            n_double = double.Parse(n);
+            if (op == "reciprocal")
+            {
+                n_double = 1 / n_double;
+                return n_double.ToString();
+            }
+            else if (op == "sqr")
+            {
+                n_double = Math.Pow(n_double, 2);
+                return n_double.ToString();
+            }
+
+            else if (op == "percent")
+            {             
+                n_double = nums[0] * (n_double / 100);
+                return n_double.ToString();
+            }
+            else if (op == "sqrt")
+            {
+                n_double = Math.Pow(n_double, 0.5);
+                return n_double.ToString();
+            }
+
+            return "";
+        }
 
         private static void pemdas_logic(int nth, string operation)
         {

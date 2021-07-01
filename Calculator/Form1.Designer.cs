@@ -429,6 +429,7 @@ namespace Calculator
             // 
             // output_screen
             // 
+            this.output_screen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.output_screen.Location = new System.Drawing.Point(8, 12);
             this.output_screen.Name = "output_screen";
             this.output_screen.Size = new System.Drawing.Size(318, 48);
