@@ -16,6 +16,7 @@ namespace Calculator
         string divSym = "÷";     //Symbol for Division
         string addSym = "+";     //Symbol for Addition
         string subSym = "-";     //Symbol for Subtraction
+        bool op_actv = false;
         public string n = "";  //used to make variables seperate
         public Form1()
         {
@@ -31,6 +32,7 @@ namespace Calculator
             }
             n = n + add_char;
             ioScreen.Text = ioScreen.Text + add_char;
+            op_actv = false;
         }
         private void addOutputscreen(string add_char)
         {
@@ -38,44 +40,39 @@ namespace Calculator
         }
         private void ops_Click(string num, string op)
         {
-            nth++;
-            PEMDAS.add_num(double.Parse(num));
-            PEMDAS.add_ops(op);
-            addOutputscreen(num + " " + op + " ");
-            n = "";
+            if (op_actv == false)
+            {
+                if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
+                {
+                    nth++;
+                    PEMDAS.add_num(double.Parse(num));
+                    PEMDAS.add_ops(op);
+                    addOutputscreen(num + " " + op + " ");
+                    n = "";
+                    op_actv = true;
+                }
+            }                        
         }
 
         //Operation Events
         private void plus_Click(object sender, EventArgs e)
-        {
-            if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
-            {
-                ops_Click(n, addSym);                 
-            }               
+        {        
+            ops_Click(n, addSym);                              
         }
 
         private void minus_Click(object sender, EventArgs e)
         {
-            if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
-            {
-                ops_Click(n, subSym);
-            }
+            ops_Click(n, subSym);
         }
 
         private void div_Click(object sender, EventArgs e)
         {
-            if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
-            {
-                ops_Click(n, divSym);
-            }            
+            ops_Click(n, divSym);         
         }
 
         private void mult_Click(object sender, EventArgs e)
-        {
-            if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
-            {
-                ops_Click(n, multSym);
-            }
+        {         
+            ops_Click(n, multSym);          
         }
 
         //Other Events
@@ -127,6 +124,7 @@ namespace Calculator
         {
             ioScreen.Text = String.Empty;;          
             n = "";
+            op_actv = true;
         }
         private void clearE_Click(object sender, EventArgs e)
         {
@@ -135,6 +133,7 @@ namespace Calculator
             PEMDAS.ops.Clear();
             PEMDAS.nums.Clear();
             n = "";
+            op_actv = false;
         }
 
         private void backspace_Click(object sender, EventArgs e)
@@ -165,6 +164,7 @@ namespace Calculator
                     output_screen.Text = output_screen.Text.Remove(output_screen.TextLength - n.Length - 3, n.Length + 3);
                     PEMDAS.ops.RemoveAt(last_opIndex - 1);
                     last_opIndex = PEMDAS.ops.Count();
+                    op_actv = false;
                 }              
             }
             
