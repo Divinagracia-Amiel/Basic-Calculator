@@ -14,8 +14,6 @@ namespace Calculator
         int last_numsIndex; //Used in backspace even, last ops index
         string multSym = "×";    //Symbol for multiplication
         string divSym = "÷";     //Symbol for Division
-        string addSym = "+";     //Symbol for Addition
-        string subSym = "-";     //Symbol for subtraction
         string n = "";  //used to make variables seperate
         public Form1()
         {
@@ -36,11 +34,6 @@ namespace Calculator
         private void addOutputscreen(string add_char)
         {
             output_screen.Text = output_screen.Text + add_char;
-        }
-
-        private void ioScreen_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         //Operation Events
@@ -155,6 +148,12 @@ namespace Calculator
         {
             last_opIndex = PEMDAS.ops.Count();
             last_numsIndex = PEMDAS.nums.Count();
+            if (ioScreen.Text[0].ToString() == "-" && ioScreen.TextLength == 2)
+            {
+                ioScreen.Text = ioScreen.Text.Remove(ioScreen.TextLength - 1, 1);
+                n = n.Remove(n.Length - 1, 1);
+            }
+
             if (ioScreen.Text.Length >= 1)
             {
                 ioScreen.Text = ioScreen.Text.Remove(ioScreen.TextLength - 1, 1);
@@ -164,7 +163,7 @@ namespace Calculator
                 }
             }
 
-            if (ioScreen.Text == "" || ioScreen.Text == "0")
+            if (ioScreen.Text == "" || ioScreen.Text == "0") // Replacing current number with the previous one
             {
                 if (output_screen.TextLength - n.Length - 3 > 0 && PEMDAS.nums.Count > 0)
                 {
@@ -172,22 +171,31 @@ namespace Calculator
                     ioScreen.Text += n;
                     output_screen.Text = output_screen.Text.Remove(output_screen.TextLength - n.Length - 3, n.Length + 3);
                     PEMDAS.ops.RemoveAt(last_opIndex - 1);
+                    last_opIndex = PEMDAS.ops.Count();
                 }              
             }
+            
 
-
-            if (last_opIndex < last_numsIndex)
+            if (last_opIndex < last_numsIndex) // so that the ops list count is the same as nums list count
             {
                 PEMDAS.nums.RemoveAt(last_numsIndex - 1);
             }          
         }
         private void neg_Click(object sender, EventArgs e)
-        {        
-            if (n.Contains("-") == false)
+        {
+            if (n != "")
             {
-                ioScreen.Text = "-" + ioScreen.Text;
-                n = "-" + n;
-            }
+                if (n.Contains("-") == false)
+                {
+                    ioScreen.Text = "-" + ioScreen.Text;
+                    n = "-" + n;
+                }
+                else
+                {
+                    ioScreen.Text = ioScreen.Text.Remove(0, 1);
+                    n = n.Remove(0, 1);
+                }
+            }           
         }
 
         private void ans_Click(object sender, EventArgs e)
@@ -281,6 +289,10 @@ namespace Calculator
             hist_list.SelectionAlignment = HorizontalAlignment.Right;
             ioScreen.Text = "0";
         }
-       
+        private void ioScreen_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
