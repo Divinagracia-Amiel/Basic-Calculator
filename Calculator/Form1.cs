@@ -32,21 +32,25 @@ namespace Calculator
             n = n + add_char;
             ioScreen.Text = ioScreen.Text + add_char;
         }
-        public void addOutputscreen(string add_char)
+        private void addOutputscreen(string add_char)
         {
             output_screen.Text = output_screen.Text + add_char;
+        }
+        private void ops_Click(string num, string op)
+        {
+            nth++;
+            PEMDAS.add_num(double.Parse(num));
+            PEMDAS.add_ops(op);
+            addOutputscreen(num + " " + op + " ");
+            n = "";
         }
 
         //Operation Events
         private void plus_Click(object sender, EventArgs e)
         {
             if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
-            {    
-                nth++;
-                PEMDAS.add_num(double.Parse(n));
-                PEMDAS.add_ops("+");
-                addOutputscreen(n + " + ");           
-                n = "";                  
+            {
+                ops_Click(n, addSym);                 
             }               
         }
 
@@ -54,11 +58,7 @@ namespace Calculator
         {
             if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
             {
-                nth++;
-                PEMDAS.add_num(double.Parse(n));
-                PEMDAS.add_ops("-");
-                addOutputscreen(n + " - ");
-                n = "";
+                ops_Click(n, subSym);
             }
         }
 
@@ -66,11 +66,7 @@ namespace Calculator
         {
             if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
             {
-                nth++;
-                PEMDAS.add_num(double.Parse(n));
-                PEMDAS.add_ops(divSym);
-                addOutputscreen(n + " " + divSym + " ");
-                n = "";
+                ops_Click(n, divSym);
             }            
         }
 
@@ -78,11 +74,7 @@ namespace Calculator
         {
             if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
             {
-                nth++;
-                PEMDAS.add_num(double.Parse(n));
-                PEMDAS.add_ops(multSym);
-                addOutputscreen(n + " " + multSym + " ");
-                n = "";
+                ops_Click(n, multSym);
             }
         }
 

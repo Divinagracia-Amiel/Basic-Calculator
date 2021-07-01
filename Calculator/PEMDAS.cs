@@ -35,16 +35,7 @@ namespace Calculator
             dict_quan = nums.Count();
             return dict_quan;
         }
-        
-        public static void ops_Click(string num, string op)
-        {
-            nth++;
-            PEMDAS.add_num(double.Parse(num));
-            PEMDAS.add_ops(op);
-            Form1 addoutput = new Form1();
-            addoutput.addOutputscreen(num + " " + op + " ");
-            addoutput.n = "";
-        }
+              
 
         private static void pemdas_logic(int nth, string operation)
         {

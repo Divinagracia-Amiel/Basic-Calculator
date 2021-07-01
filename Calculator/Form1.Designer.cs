@@ -529,7 +529,7 @@ namespace Calculator
         private System.Windows.Forms.Button m_clear;
         private System.Windows.Forms.Button m_store;
         private System.Windows.Forms.RichTextBox hist_list;
-        private System.Windows.Forms.RichTextBox output_screen;
+        public System.Windows.Forms.RichTextBox output_screen;
         private System.Windows.Forms.Button clearE;
     }
 }
