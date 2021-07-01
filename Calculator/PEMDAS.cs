@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calculator
 {
-    public static class PEMDAS
+    public static class PEMDAS 
     {
         static double res;     //result
         static int init_count; //for checking what order an operator is
@@ -28,11 +28,22 @@ namespace Calculator
         public static void add_ops(string op)
         {
             ops.Add(op);
-        }
-        public static int dict_check() //dictionary count
+        }       
+
+        private static int dict_check() //dictionary count
         {
             dict_quan = nums.Count();
             return dict_quan;
+        }
+        
+        public static void ops_Click(string num, string op)
+        {
+            nth++;
+            PEMDAS.add_num(double.Parse(num));
+            PEMDAS.add_ops(op);
+            Form1 addoutput = new Form1();
+            addoutput.addOutputscreen(num + " " + op + " ");
+            addoutput.n = "";
         }
 
         private static void pemdas_logic(int nth, string operation)

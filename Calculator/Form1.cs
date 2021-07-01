@@ -14,7 +14,9 @@ namespace Calculator
         int last_numsIndex; //Used in backspace even, last ops index
         string multSym = "×";    //Symbol for multiplication
         string divSym = "÷";     //Symbol for Division
-        string n = "";  //used to make variables seperate
+        string addSym = "+";     //Symbol for Addition
+        string subSym = "-";     //Symbol for Subtraction
+        public string n = "";  //used to make variables seperate
         public Form1()
         {
             InitializeComponent();
@@ -30,8 +32,7 @@ namespace Calculator
             n = n + add_char;
             ioScreen.Text = ioScreen.Text + add_char;
         }
-
-        private void addOutputscreen(string add_char)
+        public void addOutputscreen(string add_char)
         {
             output_screen.Text = output_screen.Text + add_char;
         }
