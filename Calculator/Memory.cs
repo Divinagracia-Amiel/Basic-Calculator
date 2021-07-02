@@ -10,12 +10,14 @@ namespace Calculator
 {
     public class Memory 
     {
-
+        double n;
+        double n_2;
+        double res;
         public void add_mem(Form1 main_form)
         {
             int name = main_form.name;
             int panel_newLoc_multiplier = main_form.panel_newLoc_multiplier;
-            Label Mem_objLabel = new Label();
+            RichTextBox Mem_objtxtbox = new RichTextBox();
             Panel Mem_obj = new Panel();
             Button btn_MR = new Button();
             Button btn_mAdd = new Button();
@@ -46,20 +48,40 @@ namespace Calculator
             btn_mSub.Location = new Point(160, 29);
             btn_mSub.Margin = new Padding(1, 1, 1, 1);
             btn_mSub.Size = new Size(46, 31);
-            Mem_objLabel.Name = "label" + name;
-            Mem_objLabel.Text = "69";
-            Mem_objLabel.Location = new Point(176, 2);
-            Mem_objLabel.Margin = new Padding(3, 0, 3, 0);
-            Mem_objLabel.Size = new Size(30, 24);
-            Mem_objLabel.Font = new Font("Microsoft Sans Serif", 14);      
-            Mem_obj.Controls.AddRange(new Control[] { btn_MR, btn_mAdd, btn_mSub, Mem_objLabel });
+            Mem_objtxtbox.Name = "label" + name;
+            Mem_objtxtbox.Location = new Point(3, 2);
+            Mem_objtxtbox.SelectAll();
+            Mem_objtxtbox.SelectionAlignment = HorizontalAlignment.Right;
+            Mem_objtxtbox.Margin = new Padding(3, 0, 3, 0);
+            Mem_objtxtbox.Size = new Size(203, 24);
+            Mem_objtxtbox.Text = main_form.ioScreen.Text;
+            Mem_objtxtbox.Font = new Font("Microsoft Sans Serif", 14);
+            btn_MR.Click += (obj, eArgs) =>
+            {
+               
+            };
+            btn_mAdd.Click += (obj, eArgs) =>
+            {
+                n = double.Parse(main_form.ioScreen.Text);
+                n_2 = double.Parse(Mem_objtxtbox.Text);              
+                res = n + n_2;
+                Mem_objtxtbox.Text = res.ToString();                                     
+            };
+            btn_mSub.Click += (obs, eArgs) =>
+            {
+                n = double.Parse(main_form.ioScreen.Text);
+                n_2 = double.Parse(Mem_objtxtbox.Text);
+                res = n_2 - n;
+                Mem_objtxtbox.Text = res.ToString();
+            };
+            Mem_obj.Controls.AddRange(new Control[] { btn_MR, btn_mAdd, btn_mSub, Mem_objtxtbox });
             main_form.panel_newLoc_multiplier++;
             main_form.name++;
         }
 
-        public void method(Form1 control)
+        public void method()
         {
-            
+                
         }
     }
 }

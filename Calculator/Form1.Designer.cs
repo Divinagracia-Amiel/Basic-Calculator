@@ -283,6 +283,7 @@ namespace Calculator
             this.ioScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ioScreen.Location = new System.Drawing.Point(8, 66);
             this.ioScreen.Name = "ioScreen";
+            this.ioScreen.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.ioScreen.Size = new System.Drawing.Size(319, 32);
             this.ioScreen.TabIndex = 23;
             this.ioScreen.Text = "";

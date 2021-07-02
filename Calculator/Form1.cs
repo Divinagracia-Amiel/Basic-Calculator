@@ -80,16 +80,25 @@ namespace Calculator
         //Other Events
         private void sqr_function_Click(object sender, EventArgs e)
         {
-            n = PEMDAS.other_ops(n, "sqr");
-            ioScreen.Text = String.Empty;
-            ioScreen.Text += n;
+            if (ioScreen.Text != "" && ioScreen.Text != "0")
+            {
+                n = PEMDAS.other_ops(n, "sqr");
+                ioScreen.Text = String.Empty;
+                ioScreen.Text += n;
+            }        
         }
+
+        
+
 
         private void reciprocal_Click(object sender, EventArgs e)
         {
-            n = PEMDAS.other_ops(n, "reciprocal");
-            ioScreen.Text = String.Empty;
-            ioScreen.Text += n;
+            if (ioScreen.Text != "" && ioScreen.Text != "0")
+            {
+                n = PEMDAS.other_ops(n, "reciprocal");
+                ioScreen.Text = String.Empty;
+                ioScreen.Text += n;
+            }          
         }
 
         private void percent_Click(object sender, EventArgs e)
@@ -105,15 +114,17 @@ namespace Calculator
 
         private void sqrt_function_Click(object sender, EventArgs e)
         {
-            n = PEMDAS.other_ops(n, "sqrt");
-            ioScreen.Text = String.Empty;
-            ioScreen.Text += n;
+            if (ioScreen.Text != "" && ioScreen.Text != "0")
+            {
+                n = PEMDAS.other_ops(n, "sqrt");
+                ioScreen.Text = String.Empty;
+                ioScreen.Text += n;
+            }       
         }
 
         private void m_clear_Click(object sender, EventArgs e)
         {
-            Memory mem_text = new Memory();
-            mem_text.add_mem(this);
+            
         }
 
         private void m_recall_Click(object sender, EventArgs e)
@@ -133,7 +144,8 @@ namespace Calculator
 
         private void m_store_Click(object sender, EventArgs e)
         {
-
+            Memory mem_text = new Memory();
+            mem_text.add_mem(this);
         }
         private void clear_Click(object sender, EventArgs e)
         {
