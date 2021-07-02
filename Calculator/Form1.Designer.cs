@@ -516,14 +516,13 @@ namespace Calculator
         private System.Windows.Forms.Button clear;
         private System.Windows.Forms.Button backspace;
         private System.Windows.Forms.Button ans;
-        private System.Windows.Forms.RichTextBox ioScreen;
+        public System.Windows.Forms.RichTextBox ioScreen;
         private System.Windows.Forms.Button reciprocal;
         private System.Windows.Forms.Button sqr_function;
         private System.Windows.Forms.Button sqrt_function;
         private System.Windows.Forms.Button percent;
-        private System.Windows.Forms.TabControl hist_mem;
-        private System.Windows.Forms.TabPage hist_page;
-        private System.Windows.Forms.TabPage mem_page;
+        public System.Windows.Forms.TabPage hist_page;
+        public System.Windows.Forms.TabPage mem_page;
         private System.Windows.Forms.Button m_add;
         private System.Windows.Forms.Button m_sub;
         private System.Windows.Forms.Button m_recall;
@@ -532,6 +531,7 @@ namespace Calculator
         private System.Windows.Forms.RichTextBox hist_list;
         public System.Windows.Forms.RichTextBox output_screen;
         private System.Windows.Forms.Button clearE;
+        public System.Windows.Forms.TabControl hist_mem;
     }
 }
 

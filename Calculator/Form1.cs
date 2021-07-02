@@ -6,7 +6,9 @@ using System.Windows.Forms;
 namespace Calculator
 {
     public partial class Form1 : Form
-    {   
+    {
+        public int name = 1;
+        public int panel_newLoc_multiplier = 0;
         double res;     //result
         double prev_res; //to store the previous result
         int nth = 0;    //nth key or nth operands
@@ -110,7 +112,8 @@ namespace Calculator
 
         private void m_clear_Click(object sender, EventArgs e)
         {
-
+            Memory mem_text = new Memory();
+            mem_text.add_mem(this);
         }
 
         private void m_recall_Click(object sender, EventArgs e)
@@ -120,7 +123,7 @@ namespace Calculator
 
         private void m_add_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void m_sub_Click(object sender, EventArgs e)
@@ -305,6 +308,7 @@ namespace Calculator
         {
 
         }
+
 
     }
 }
