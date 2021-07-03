@@ -12,9 +12,11 @@ namespace Calculator
     {
         double n;
         double n_2;
-        double res;
+        private double res;
+        private int last_control;
         public void add_mem(Form1 main_form)
         {
+            res = 0;
             int name = main_form.name;
             int panel_newLoc_multiplier = main_form.panel_newLoc_multiplier;
             RichTextBox Mem_objtxtbox = new RichTextBox();
@@ -23,16 +25,17 @@ namespace Calculator
             Button btn_mAdd = new Button();
             Button btn_mSub = new Button();
             Mem_obj.Name = "panel" + name;
-            if (main_form.panel_newLoc_multiplier == 0)
-            {
-                Mem_obj.Location = new Point(3, 3);
-            }
-            else
-            {
-                Mem_obj.Top = panel_newLoc_multiplier * 64;
-            }
+            Mem_obj.Location = new Point(3, 3);
             Mem_obj.Size = new Size(209, 60);
-            main_form.mem_page.Controls.Add(Mem_obj);
+            if (main_form.mem_page.Controls.Count > 0)
+            {
+                last_control = main_form.mem_page.Controls.Count;
+                for (int i = last_control - 1; i >= 0; i--)
+                {
+                    main_form.mem_page.Controls[i].Top += 64;
+                }
+            }
+            main_form.mem_page.Controls.Add(Mem_obj);                 
             btn_MR.Name = "btn_MR" + name;
             btn_MR.Text = "MR";
             btn_MR.Location = new Point(64, 29);
@@ -79,9 +82,9 @@ namespace Calculator
             main_form.name++;
         }
 
-        public void method()
+        public void add_res(Form1 main_form)
         {
-                
+            
         }
     }
 }

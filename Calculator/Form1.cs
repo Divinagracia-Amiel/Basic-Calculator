@@ -124,7 +124,7 @@ namespace Calculator
 
         private void m_clear_Click(object sender, EventArgs e)
         {
-            
+            mem_page.Controls.Clear();
         }
 
         private void m_recall_Click(object sender, EventArgs e)
@@ -134,7 +134,7 @@ namespace Calculator
 
         private void m_add_Click(object sender, EventArgs e)
         {
-            
+      
         }
 
         private void m_sub_Click(object sender, EventArgs e)
