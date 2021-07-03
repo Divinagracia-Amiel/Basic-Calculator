@@ -7,6 +7,8 @@ namespace Calculator
 {
     public partial class Form1 : Form
     {
+        public Control panelVal;
+        double mem_pageVal;
         public int name = 1;
         public int panel_newLoc_multiplier = 0;
         double res;     //result
@@ -134,12 +136,22 @@ namespace Calculator
 
         private void m_add_Click(object sender, EventArgs e)
         {
-      
+            Memory panel_cont = new Memory();
+            if (mem_page.Controls.Count > 0) 
+            {
+                mem_pageVal = double.Parse(n) + double.Parse(panelVal.Text);
+                panelVal.Text = mem_pageVal.ToString();
+            }
         }
 
         private void m_sub_Click(object sender, EventArgs e)
         {
-
+            Memory panel_cont = new Memory();
+            if (mem_page.Controls.Count > 0)
+            {
+                mem_pageVal = double.Parse(n) - double.Parse(panelVal.Text);
+                panelVal.Text = mem_pageVal.ToString();
+            }
         }
 
         private void m_store_Click(object sender, EventArgs e)
@@ -167,39 +179,50 @@ namespace Calculator
         {
             last_opIndex = PEMDAS.ops.Count();
             last_numsIndex = PEMDAS.nums.Count();
-            if (ioScreen.Text[0].ToString() == "-" && ioScreen.TextLength == 2)
+            while (true)
             {
-                ioScreen.Text = ioScreen.Text.Remove(ioScreen.TextLength - 1, 1);
-                n = n.Remove(n.Length - 1, 1);
-            }
-
-            if (ioScreen.Text.Length >= 1)
-            {
-                ioScreen.Text = ioScreen.Text.Remove(ioScreen.TextLength - 1, 1);
-                if (n.Length >= 1)
+                if (ioScreen.Text == "" || ioScreen.Text == "0") // 
                 {
+                    if (PEMDAS.nums.Count == 0)
+                    {
+                        break;
+                    }
+                }
+                if (ioScreen.Text[0].ToString() == "-" && ioScreen.TextLength == 2)
+                {
+                    ioScreen.Text = ioScreen.Text.Remove(ioScreen.TextLength - 1, 1);
                     n = n.Remove(n.Length - 1, 1);
                 }
-            }
 
-            if (ioScreen.Text == "" || ioScreen.Text == "0") // Replacing current number with the previous one
-            {
-                if (output_screen.TextLength - n.Length - 3 > 0 && PEMDAS.nums.Count > 0)
+                if (ioScreen.Text.Length >= 1)
                 {
-                    n = PEMDAS.nums[last_numsIndex - 1].ToString();
-                    ioScreen.Text += n;
-                    output_screen.Text = output_screen.Text.Remove(output_screen.TextLength - n.Length - 3, n.Length + 3);
-                    PEMDAS.ops.RemoveAt(last_opIndex - 1);
-                    last_opIndex = PEMDAS.ops.Count();
-                    op_actv = false;
-                }              
-            }
-            
+                    ioScreen.Text = ioScreen.Text.Remove(ioScreen.TextLength - 1, 1);
+                    if (n.Length >= 1)
+                    {
+                        n = n.Remove(n.Length - 1, 1);
+                    }
+                }
 
-            if (last_opIndex < last_numsIndex) // so that the ops list count is the same as nums list count
-            {
-                PEMDAS.nums.RemoveAt(last_numsIndex - 1);
-            }          
+                if (ioScreen.Text == "" || ioScreen.Text == "0") // Replacing current number with the previous one
+                {
+                    if (output_screen.TextLength - n.Length - 3 > 0 && PEMDAS.nums.Count > 0)
+                    {
+                        n = PEMDAS.nums[last_numsIndex - 1].ToString();
+                        ioScreen.Text += n;
+                        output_screen.Text = output_screen.Text.Remove(output_screen.TextLength - n.Length - 3, n.Length + 3);
+                        PEMDAS.ops.RemoveAt(last_opIndex - 1);
+                        last_opIndex = PEMDAS.ops.Count();
+                        op_actv = false;
+                    }
+                }
+
+
+                if (last_opIndex < last_numsIndex) // so that the ops list count is the same as nums list count
+                {
+                    PEMDAS.nums.RemoveAt(last_numsIndex - 1);
+                }
+                break;
+            }        
         }
         private void neg_Click(object sender, EventArgs e)
         {

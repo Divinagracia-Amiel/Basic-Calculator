@@ -9,7 +9,7 @@ using System.Drawing;
 namespace Calculator
 {
     public class Memory 
-    {
+    {      
         double n;
         double n_2;
         private double res;
@@ -68,7 +68,7 @@ namespace Calculator
                 n = double.Parse(main_form.ioScreen.Text);
                 n_2 = double.Parse(Mem_objtxtbox.Text);              
                 res = n + n_2;
-                Mem_objtxtbox.Text = res.ToString();                                     
+                Mem_objtxtbox.Text = res.ToString();
             };
             btn_mSub.Click += (obs, eArgs) =>
             {
@@ -78,13 +78,9 @@ namespace Calculator
                 Mem_objtxtbox.Text = res.ToString();
             };
             Mem_obj.Controls.AddRange(new Control[] { btn_MR, btn_mAdd, btn_mSub, Mem_objtxtbox });
+            main_form.panelVal = Mem_objtxtbox;
             main_form.panel_newLoc_multiplier++;
             main_form.name++;
-        }
-
-        public void add_res(Form1 main_form)
-        {
-            
         }
     }
 }
