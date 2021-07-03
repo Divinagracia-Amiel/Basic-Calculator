@@ -6,206 +6,216 @@ using System.Windows.Forms;
 namespace Calculator
 {
     public partial class Form1 : Form
-    {                
+    {
+        public int name = 1;
+        public int panel_newLoc_multiplier = 0;
         double res;     //result
         double prev_res; //to store the previous result
-        int init_count; //for checking what order an operator is
-        int dict_quan;  //Quantity of keys in dictionary
         int nth = 0;    //nth key or nth operands
-        int nth_mult; //index of a multiplication symbol
-        int nth_div; //index of a division symbol
-        int end_io;  //index of last character of ioScreen.Text      
-        int end_n;   //index of last character of n
         int last_opIndex; //Used in backspace event, last ops index
         int last_numsIndex; //Used in backspace even, last ops index
-        char idx_end_io_ch; //To convert into string later on
         string multSym = "×";    //Symbol for multiplication
         string divSym = "÷";     //Symbol for Division
         string addSym = "+";     //Symbol for Addition
-        string subSym = "-";     //Symbol for subtraction
-        string idx_end_io;
-        string n = "";  //used to make variables seperate
-        List<double> nums = new List<double>(); //list for nth operand and its value
-        List<string> ops = new List<string>(); //list for nth operators
-        List<string> texts = new List<string>();
+        string subSym = "-";     //Symbol for Subtraction
+        bool op_actv = false;
+        public string n = "";  //used to make variables seperate
         public Form1()
         {
             InitializeComponent();
         }
 
-        //Methods
-        private int dict_check() //dictionary count
-        {
-            dict_quan = nums.Count();
-            return dict_quan;
-        }
-
-        private int ops_check(string op) //Checks what index in the operation dictionary, is a multiplication or division
-        {
-            init_count = dict_check() - 1;
-            if (op == multSym)
-            {               
-                for (int i = 0; i < init_count; i++)
-                {
-                    if (ops[i] == multSym)
-                    {
-                        return i;
-                    }
-                }
-            }
-            else if (op == divSym)
-            {
-                for (int i = 0 ; i < init_count; i++)
-                {
-                    if (ops[i] == divSym)
-                    {
-                        return i;
-                    }
-                }
-            }
-            return 1;
-        }
-
-        private bool ops_contains(string op) //Checks whether the operation is in the equation
-        {
-            init_count = dict_check() - 1;
-            if (op == multSym)
-            {
-                for (int i = 0; i < init_count; i++)
-                {
-                    if (ops[i] == multSym)
-                    {
-                        return true;
-                    }
-                }             
-            }
-            else if (op == divSym)
-            {
-                for (int i = 0; i < init_count; i++)
-                {
-                    if (ops[i] == divSym)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
+        //Methods           
         private void Add_text(string add_char)
         {
+            if (n == "" || n == "0")
+            {
+                ioScreen.Text = String.Empty;
+            }
             n = n + add_char;
             ioScreen.Text = ioScreen.Text + add_char;
+            op_actv = false;
         }
-
-        private void ioScreen_TextChanged(object sender, EventArgs e)
+        private void addOutputscreen(string add_char)
         {
-
+            output_screen.Text = output_screen.Text + add_char;
+        }
+        private void ops_Click(string num, string op)
+        {
+            if (op_actv == false)
+            {
+                if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
+                {
+                    nth++;
+                    PEMDAS.add_num(double.Parse(num));
+                    PEMDAS.add_ops(op);
+                    addOutputscreen(num + " " + op + " ");
+                    n = "";
+                    op_actv = true;
+                }
+            }                        
         }
 
         //Operation Events
         private void plus_Click(object sender, EventArgs e)
-        {
-
-            if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
-            {    
-                nth++;
-                nums.Add(double.Parse(n));
-                ops.Add("+");
-                ioScreen.Text = ioScreen.Text + " + ";                  
-                n = "";                  
-            }               
+        {        
+            ops_Click(n, addSym);                              
         }
 
         private void minus_Click(object sender, EventArgs e)
         {
-            if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
-            {
-                nth++;
-                nums.Add(double.Parse(n));
-                ops.Add("-");
-                ioScreen.Text = ioScreen.Text + " - ";
-                n = "";
-            }
+            ops_Click(n, subSym);
         }
 
         private void div_Click(object sender, EventArgs e)
         {
-            if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
-            {
-                nth++;
-                nums.Add(double.Parse(n));
-                ops.Add(divSym);
-                ioScreen.Text = ioScreen.Text + " ÷ ";
-                n = "";
-            }            
+            ops_Click(n, divSym);         
         }
 
         private void mult_Click(object sender, EventArgs e)
-        {
-            if (ioScreen.Text != "" || n != "") //As to not make an error when ioScreen.Text is empty
-            {
-                nth++;
-                nums.Add(double.Parse(n));
-                ops.Add(multSym);
-                ioScreen.Text = ioScreen.Text + " × ";
-                n = "";
-            }
+        {         
+            ops_Click(n, multSym);          
         }
-       
+
         //Other Events
+        private void sqr_function_Click(object sender, EventArgs e)
+        {
+            if (ioScreen.Text != "" && ioScreen.Text != "0")
+            {
+                n = PEMDAS.other_ops(n, "sqr");
+                ioScreen.Text = String.Empty;
+                ioScreen.Text += n;
+            }        
+        }
+
+        
+
+
+        private void reciprocal_Click(object sender, EventArgs e)
+        {
+            if (ioScreen.Text != "" && ioScreen.Text != "0")
+            {
+                n = PEMDAS.other_ops(n, "reciprocal");
+                ioScreen.Text = String.Empty;
+                ioScreen.Text += n;
+            }          
+        }
+
+        private void percent_Click(object sender, EventArgs e)
+        {
+            if (PEMDAS.nums.Count != 0)
+            {
+                n = PEMDAS.other_ops(n, "percent");
+                ioScreen.Text = String.Empty;
+                ioScreen.Text += n;
+                equal.PerformClick();
+            }               
+        }
+
+        private void sqrt_function_Click(object sender, EventArgs e)
+        {
+            if (ioScreen.Text != "" && ioScreen.Text != "0")
+            {
+                n = PEMDAS.other_ops(n, "sqrt");
+                ioScreen.Text = String.Empty;
+                ioScreen.Text += n;
+            }       
+        }
+
+        private void m_clear_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void m_recall_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void m_add_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void m_sub_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void m_store_Click(object sender, EventArgs e)
+        {
+            Memory mem_text = new Memory();
+            mem_text.add_mem(this);
+        }
         private void clear_Click(object sender, EventArgs e)
         {
+            ioScreen.Text = String.Empty;;          
+            n = "";
+            op_actv = true;
+        }
+        private void clearE_Click(object sender, EventArgs e)
+        {
             ioScreen.Text = String.Empty;
-            res = 0;
-            ops.Clear();
-            nums.Clear();
-            n = "0";
+            output_screen.Text = String.Empty;
+            PEMDAS.ops.Clear();
+            PEMDAS.nums.Clear();
+            n = "";
+            op_actv = false;
         }
 
         private void backspace_Click(object sender, EventArgs e)
         {
-            end_io = ioScreen.Text.Length;
-            end_n = n.Length;
-            last_opIndex = ops.Count();
-            last_numsIndex = nums.Count;
-
-            if (ioScreen.Text == "")
+            last_opIndex = PEMDAS.ops.Count();
+            last_numsIndex = PEMDAS.nums.Count();
+            if (ioScreen.Text[0].ToString() == "-" && ioScreen.TextLength == 2)
             {
-                n = "0";
-                res = 0;
-                ops.Clear();
-                nums.Clear();
+                ioScreen.Text = ioScreen.Text.Remove(ioScreen.TextLength - 1, 1);
+                n = n.Remove(n.Length - 1, 1);
             }
+
             if (ioScreen.Text.Length >= 1)
-            {               
-                idx_end_io_ch = ioScreen.Text[end_io - 1];
-                idx_end_io = idx_end_io_ch.ToString();
-                ioScreen.Text = ioScreen.Text.Remove(end_io - 1, 1);                            
+            {
+                ioScreen.Text = ioScreen.Text.Remove(ioScreen.TextLength - 1, 1);
+                if (n.Length >= 1)
+                {
+                    n = n.Remove(n.Length - 1, 1);
+                }
+            }
+
+            if (ioScreen.Text == "" || ioScreen.Text == "0") // Replacing current number with the previous one
+            {
+                if (output_screen.TextLength - n.Length - 3 > 0 && PEMDAS.nums.Count > 0)
+                {
+                    n = PEMDAS.nums[last_numsIndex - 1].ToString();
+                    ioScreen.Text += n;
+                    output_screen.Text = output_screen.Text.Remove(output_screen.TextLength - n.Length - 3, n.Length + 3);
+                    PEMDAS.ops.RemoveAt(last_opIndex - 1);
+                    last_opIndex = PEMDAS.ops.Count();
+                    op_actv = false;
+                }              
             }
             
-            if (idx_end_io == multSym || idx_end_io == divSym || idx_end_io == addSym || idx_end_io == subSym)
-            {             
-                ops.RemoveAt(last_opIndex - 1);
-            }
 
-            if (last_opIndex < last_numsIndex)
+            if (last_opIndex < last_numsIndex) // so that the ops list count is the same as nums list count
             {
-                nums.RemoveAt(last_numsIndex - 1);
-            }
-
-            if (n.Length >= 1)
-            {
-                n = n.Remove(end_n - 1, 1);
-            }
+                PEMDAS.nums.RemoveAt(last_numsIndex - 1);
+            }          
         }
         private void neg_Click(object sender, EventArgs e)
-        {        
-            if (n.Contains("-") == false)
+        {
+            if (n != "")
             {
-                ioScreen.Text = "-" + ioScreen.Text;
-                n = "-" + n;
-            }
+                if (n.Contains("-") == false)
+                {
+                    ioScreen.Text = "-" + ioScreen.Text;
+                    n = "-" + n;
+                }
+                else
+                {
+                    ioScreen.Text = ioScreen.Text.Remove(0, 1);
+                    n = n.Remove(0, 1);
+                }
+            }           
         }
 
         private void ans_Click(object sender, EventArgs e)
@@ -216,140 +226,101 @@ namespace Calculator
 
         private void equal_Click(object sender, EventArgs e)
         {
-            if (n != "")
+            if (output_screen.Text != String.Empty)
             {
-                nth++;
-                nums.Add(double.Parse(n));
+                res = PEMDAS.equal_function(n);
+                addOutputscreen(n + " = ");
+                hist_list.Text = "\n" + output_screen.Text.Substring(0, output_screen.TextLength - 3) + "\n= " + res.ToString() + "\n" + hist_list.Text;
+                ioScreen.Text = res.ToString();
+                prev_res = res;
+                PEMDAS.ops.Clear();
+                PEMDAS.nums.Clear();
+                output_screen.Text = String.Empty;
+                n = "";
+                op_actv = true; 
             }
-            while (ops_contains(multSym) == true || ops_contains(divSym) == true)
+            else
             {
-                nth_mult = ops_check(multSym);
-                nth_div = ops_check(divSym);
-                if (ops_contains(multSym) == false)
-                {
-                    nth_div = nth_mult - 1;
-                }
-                else if (ops_contains(divSym) == false)
-                {
-                    nth_mult = nth_div - 1;
-                }
-                if (nth_mult < nth_div)
-                {
-                    nth_mult = ops_check(multSym);
-                    res = 0;
-                    res = nums[nth_mult] * nums[nth_mult + 1];
-                    nums.RemoveRange(nth_mult, 2);
-                    ops.RemoveAt(nth_mult);
-                    nums.Insert(nth_mult, res);                 
-                }                
-                else if (nth_div < nth_mult)
-                {
-                    nth_div = ops_check(divSym);
-                    res = 0;
-                    res = nums[nth_div] / nums[nth_div + 1];
-                    nums.RemoveRange(nth_div, 2);
-                    ops.RemoveAt(nth_div);
-                    nums.Insert(nth_div, res);
-                }
-            }
-            dict_quan = dict_check();
-            nth = 0;
-            for (int i = 0; i < dict_quan-1; i++)
-            {
-                if (ops[0] == addSym)
-                {
-                    res = 0;
-                    res = nums[0] + nums[0 + 1];
-                    nums.RemoveRange(nth, 2);
-                    ops.RemoveAt(nth);
-                    nums.Insert(nth, res);             
-                }
-                else if (ops[0] == subSym)
-                {
-                    res = 0;
-                    res = nums[0] - nums[0 + 1];
-                    nums.RemoveRange(nth, 2);
-                    ops.RemoveAt(nth);
-                    nums.Insert(nth, res);
-                }
-            }
-            ioScreen.Text = res.ToString();
-            prev_res = res;
-            ops.Clear();
-            nums.Clear();
-            nums.Add(res);
+                res = double.Parse(ioScreen.Text);
+                hist_list.Text = "\n" + "\n= " + res + hist_list.Text;
+                n = "";
+            }       
         }
 
         //Button Events
         private void btn_dot_Click(object sender, EventArgs e)
-        {
-            n = n + ".";
-            ioScreen.Text = ioScreen.Text + ".";
+        {          
+            Add_text(".");
         }       
 
         private void btn0_Click(object sender, EventArgs e)
         {
-            n = n + "0";
-            ioScreen.Text = ioScreen.Text + "0";
+            if (ioScreen.Text != "0")
+            {
+                Add_text("0");
+            }           
         }
 
         private void btn1_Click(object sender, EventArgs e)
         {
-            n = n + "1";
-            ioScreen.Text = ioScreen.Text + "1";
+            Add_text("1");
         }
 
         private void btn2_Click(object sender, EventArgs e)
         {
-            n = n + "2";
-            ioScreen.Text = ioScreen.Text + "2";
+            Add_text("2");
         }
 
         private void btn3_Click(object sender, EventArgs e)
         {
-            n = n + "3";
-            ioScreen.Text = ioScreen.Text + "3";
+            Add_text("3");
         }
 
         private void btn4_Click(object sender, EventArgs e)
         {
-            n = n + "4";
-            ioScreen.Text = ioScreen.Text + "4";
+            Add_text("4");
         }
 
         private void btn5_Click(object sender, EventArgs e)
         {
-            n = n + "5";
-            ioScreen.Text = ioScreen.Text + "5";
+            Add_text("5");
         }
 
         private void btn6_Click(object sender, EventArgs e)
         {
-            n = n + "6";
-            ioScreen.Text = ioScreen.Text + "6";
+            Add_text("6");
         }
 
         private void btn7_Click(object sender, EventArgs e)
         {
-            n = n + "7";
-            ioScreen.Text = ioScreen.Text + "7";
+            Add_text("7");
         }
 
         private void btn8_Click(object sender, EventArgs e)
         {
-            n = n + "8";
-            ioScreen.Text = ioScreen.Text + "8";
+            Add_text("8");
         }
 
         private void btn9_Click(object sender, EventArgs e)
         {
-            n = n + "9";
-            ioScreen.Text = ioScreen.Text + "9";
+            Add_text("9");
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ioScreen.SelectAll();
+            ioScreen.SelectionAlignment = HorizontalAlignment.Right;
+            output_screen.SelectAll();
+            output_screen.SelectionAlignment = HorizontalAlignment.Right;
+            hist_list.SelectAll();
+            hist_list.SelectionAlignment = HorizontalAlignment.Right;
+            ioScreen.Text = "0";
+        }
+        private void ioScreen_TextChanged(object sender, EventArgs e)
+        {
 
         }
+
+
     }
 }
