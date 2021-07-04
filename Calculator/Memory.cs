@@ -14,6 +14,8 @@ namespace Calculator
         double n_2;
         private double res;
         private int last_control;
+        private string removedPanelIndexName;
+        private int removedPanelIndex;
         public void add_mem(Form1 main_form)
         {
             res = 0;
@@ -48,7 +50,7 @@ namespace Calculator
             if (main_form.mem_page.Controls.Count > 0)
             {
                 last_control = main_form.mem_page.Controls.Count;
-                for (int i = last_control - 1; i >= 0; i--)
+                for (int i = 0; i <= last_control - 1; i++)
                 {
                     main_form.mem_page.Controls[i].Top += 64;
                 }
@@ -79,7 +81,20 @@ namespace Calculator
             Mem_objtxtbox.Font = new Font("Microsoft Sans Serif", 14);
             btn_MR.Click += (obj, eArgs) =>
             {
-                main_form.mem_page.Controls.Remove(Mem_obj);                                                                                                                         
+                removedPanelIndexName = Mem_obj.Name;
+                for (int i = 0; i < main_form.mem_page.Controls.Count; i++)
+                {
+                    if (main_form.mem_page.Controls[i].Name == removedPanelIndexName)
+                    {
+                        break;
+                    }
+                    removedPanelIndex++;
+                }
+                main_form.mem_page.Controls.Remove(main_form.mem_page.Controls[removedPanelIndex]);
+                for (int i = 0; i < removedPanelIndex; i++)
+                {
+                    main_form.mem_page.Controls[i].Top -= 64;
+                }          
             };
             btn_mAdd.Click += (obj, eArgs) =>
             {
