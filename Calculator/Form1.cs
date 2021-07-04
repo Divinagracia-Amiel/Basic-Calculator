@@ -90,9 +90,6 @@ namespace Calculator
             }        
         }
 
-        
-
-
         private void reciprocal_Click(object sender, EventArgs e)
         {
             if (ioScreen.Text != "" && ioScreen.Text != "0")
@@ -244,8 +241,9 @@ namespace Calculator
 
         private void ans_Click(object sender, EventArgs e)
         {
-            ioScreen.Text = ioScreen.Text + "ans";
+            ioScreen.Text = $"ans({prev_res.ToString()})";
             n = prev_res.ToString();
+            op_actv = false;
         }
 
         private void equal_Click(object sender, EventArgs e)
@@ -266,6 +264,7 @@ namespace Calculator
             else
             {
                 res = double.Parse(ioScreen.Text);
+                prev_res = res;
                 hist_list.Text = "\n" + "\n= " + res + hist_list.Text;
                 n = "";
             }       
