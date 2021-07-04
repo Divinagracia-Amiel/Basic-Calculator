@@ -27,6 +27,24 @@ namespace Calculator
             Mem_obj.Name = "panel" + name;
             Mem_obj.Location = new Point(3, 3);
             Mem_obj.Size = new Size(209, 60);
+            Mem_obj.MouseHover += (obj, eArgs) =>
+            {
+                Mem_obj.BackColor = Color.DarkGray;
+                btn_MR.BackColor = Control.DefaultBackColor;
+                btn_mSub.BackColor = Control.DefaultBackColor;
+                btn_mAdd.BackColor = Control.DefaultBackColor;
+            };
+            Mem_obj.MouseLeave += (obj, eArgs) =>
+            {
+                Mem_obj.BackColor = Color.Transparent;
+                btn_MR.BackColor = Control.DefaultBackColor;
+                btn_mSub.BackColor = Control.DefaultBackColor;
+                btn_mAdd.BackColor = Control.DefaultBackColor;
+            };
+            Mem_obj.DoubleClick += (obj, eArgs) =>
+            {
+                main_form.ioScreen.Text = Mem_obj.Controls[3].Text;
+            };
             if (main_form.mem_page.Controls.Count > 0)
             {
                 last_control = main_form.mem_page.Controls.Count;
@@ -36,8 +54,8 @@ namespace Calculator
                 }
             }
             main_form.mem_page.Controls.Add(Mem_obj);                 
-            btn_MR.Name = "btn_MR" + name;
-            btn_MR.Text = "MR";
+            btn_MR.Name = "btn_MC" + name;
+            btn_MR.Text = "MC";
             btn_MR.Location = new Point(64, 29);
             btn_MR.Margin = new Padding(1, 1, 1, 1);
             btn_MR.Size = new Size(46, 31);

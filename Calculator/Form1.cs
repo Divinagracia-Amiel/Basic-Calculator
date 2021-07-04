@@ -131,12 +131,14 @@ namespace Calculator
 
         private void m_recall_Click(object sender, EventArgs e)
         {
-
+            if (mem_page.Controls.Count > 0)
+            {
+                ioScreen.Text = panelVal.Text;
+            }         
         }
 
         private void m_add_Click(object sender, EventArgs e)
         {
-            Memory panel_cont = new Memory();
             if (mem_page.Controls.Count > 0) 
             {
                 mem_pageVal = double.Parse(n) + double.Parse(panelVal.Text);
@@ -146,10 +148,9 @@ namespace Calculator
 
         private void m_sub_Click(object sender, EventArgs e)
         {
-            Memory panel_cont = new Memory();
             if (mem_page.Controls.Count > 0)
             {
-                mem_pageVal = double.Parse(n) - double.Parse(panelVal.Text);
+                mem_pageVal = double.Parse(panelVal.Text) - double.Parse(n);
                 panelVal.Text = mem_pageVal.ToString();
             }
         }
@@ -181,7 +182,7 @@ namespace Calculator
             last_numsIndex = PEMDAS.nums.Count();
             while (true)
             {
-                if (ioScreen.Text == "" || ioScreen.Text == "0") // 
+                if (ioScreen.Text == "" || ioScreen.Text == "0") 
                 {
                     if (PEMDAS.nums.Count == 0)
                     {
@@ -343,7 +344,5 @@ namespace Calculator
         {
 
         }
-
-
     }
 }
