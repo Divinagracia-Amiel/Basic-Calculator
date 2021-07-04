@@ -248,26 +248,35 @@ namespace Calculator
 
         private void equal_Click(object sender, EventArgs e)
         {
-            if (output_screen.Text != String.Empty)
+            while (true)
             {
-                res = PEMDAS.equal_function(n);
-                addOutputscreen(n + " = ");
-                hist_list.Text = "\n" + output_screen.Text.Substring(0, output_screen.TextLength - 3) + "\n= " + res.ToString() + "\n" + hist_list.Text;
-                ioScreen.Text = res.ToString();
-                prev_res = res;
-                PEMDAS.ops.Clear();
-                PEMDAS.nums.Clear();
-                output_screen.Text = String.Empty;
-                n = "";
-                op_actv = true; 
-            }
-            else
-            {
-                res = double.Parse(ioScreen.Text);
-                prev_res = res;
-                hist_list.Text = "\n" + "\n= " + res + hist_list.Text;
-                n = "";
-            }       
+                if (PEMDAS.checkforZero(n) == true)
+                {
+                    MessageBox.Show("Error: Cannot be divided by zero");
+                    break;
+                }
+                if (output_screen.Text != String.Empty)
+                {
+                    res = PEMDAS.equal_function(n);
+                    addOutputscreen(n + " = ");
+                    hist_list.Text = "\n" + output_screen.Text.Substring(0, output_screen.TextLength - 3) + "\n= " + res.ToString() + "\n" + hist_list.Text;
+                    ioScreen.Text = res.ToString();
+                    prev_res = res;
+                    PEMDAS.ops.Clear();
+                    PEMDAS.nums.Clear();
+                    output_screen.Text = String.Empty;
+                    n = "";
+                    op_actv = true;
+                }
+                else
+                {
+                    res = double.Parse(ioScreen.Text);
+                    prev_res = res;
+                    hist_list.Text = "\n" + "\n= " + res + hist_list.Text;
+                    n = "";
+                }
+                break;
+            }        
         }
 
         //Button Events

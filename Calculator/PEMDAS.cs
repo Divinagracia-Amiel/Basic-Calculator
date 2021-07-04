@@ -36,7 +36,20 @@ namespace Calculator
             dict_quan = nums.Count();
             return dict_quan;
         }
-
+        public static bool checkforZero(string n)
+        {
+            nums.Add(double.Parse(n));
+            for (int i = 0; i < nums.Count; i++)
+            {
+                if (nums[i + 1] == 0 && ops[i] == divSym)
+                {
+                    nums.RemoveAt(nums.Count - 1);
+                    return true;
+                }
+            }
+            nums.RemoveAt(nums.Count - 1);
+            return false;
+        }
         public static string other_ops(string n, string op)
         {
             n_double = double.Parse(n);
@@ -145,47 +158,50 @@ namespace Calculator
 
         public static double equal_function(string n)
         {
-            if (n != "")
-            {
-                nth++;
-                nums.Add(double.Parse(n));
-            }
-            while (ops_contains(multSym) == true || ops_contains(divSym) == true)
-            {
-                nth_mult = ops_check(multSym);
-                nth_div = ops_check(divSym);
-                if (ops_contains(multSym) == false)
+            while (true)
+            {              
+                if (n != "")
                 {
-                    nth_div = nth_mult - 1;
+                    nth++;
+                    nums.Add(double.Parse(n));
                 }
-                else if (ops_contains(divSym) == false)
+                while (ops_contains(multSym) == true || ops_contains(divSym) == true)
                 {
-                    nth_mult = nth_div - 1;
-                }
+                    nth_mult = ops_check(multSym);
+                    nth_div = ops_check(divSym);
+                    if (ops_contains(multSym) == false)
+                    {
+                        nth_div = nth_mult - 1;
+                    }
+                    else if (ops_contains(divSym) == false)
+                    {
+                        nth_mult = nth_div - 1;
+                    }
 
-                if (nth_mult < nth_div)
-                {
-                    pemdas_logic(nth_mult, multSym);
+                    if (nth_mult < nth_div)
+                    {
+                        pemdas_logic(nth_mult, multSym);
+                    }
+                    else if (nth_div < nth_mult)
+                    {
+                        pemdas_logic(nth_div, divSym);
+                    }
                 }
-                else if (nth_div < nth_mult)
+                dict_quan = dict_check();
+                nth = 0;
+                for (int i = 0; i < dict_quan - 1; i++)
                 {
-                    pemdas_logic(nth_div, divSym);
+                    if (ops[0] == addSym)
+                    {
+                        pemdas_logic(nth, addSym);
+                    }
+                    else if (ops[0] == subSym)
+                    {
+                        pemdas_logic(nth, subSym);
+                    }
                 }
-            }
-            dict_quan = dict_check();
-            nth = 0;
-            for (int i = 0; i < dict_quan - 1; i++)
-            {
-                if (ops[0] == addSym)
-                {
-                    pemdas_logic(nth, addSym);
-                }
-                else if (ops[0] == subSym)
-                {
-                    pemdas_logic(nth, subSym);
-                }
-            }
-            return res;
+                return res;
+            }           
         }
     }
 }
