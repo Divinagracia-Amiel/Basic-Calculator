@@ -254,7 +254,7 @@ namespace Calculator
                 {
                     MessageBox.Show("Error: Cannot be divided by zero");
                     break;
-                }
+                }          
                 if (output_screen.Text != String.Empty)
                 {
                     res = PEMDAS.equal_function(n);

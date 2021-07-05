@@ -39,13 +39,13 @@ namespace Calculator
         public static bool checkforZero(string n)
         {
             nums.Add(double.Parse(n));
-            for (int i = 0; i < nums.Count; i++)
+            for (int i = 0; i < ops.Count; i++)
             {
                 if (nums[i + 1] == 0 && ops[i] == divSym)
                 {
                     nums.RemoveAt(nums.Count - 1);
                     return true;
-                }
+                }           
             }
             nums.RemoveAt(nums.Count - 1);
             return false;
