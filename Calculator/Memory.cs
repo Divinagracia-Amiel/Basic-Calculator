@@ -46,6 +46,7 @@ namespace Calculator
             Mem_obj.DoubleClick += (obj, eArgs) =>
             {
                 main_form.ioScreen.Text = Mem_obj.Controls[3].Text;
+                main_form.n = Mem_obj.Controls[3].Text;
             };
             if (main_form.mem_page.Controls.Count > 0)
             {
